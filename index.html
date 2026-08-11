@@ -253,11 +253,60 @@ p.lead{font-size:1.06rem;color:var(--muted);max-width:60ch;margin-bottom:1.4rem}
 .reveal-box .big em{color:var(--rose);font-weight:600}
 .reveal-box .sig{font-family:'Great Vibes',cursive;font-size:2.6rem;color:var(--rose);margin-top:1.6rem}
 
+/* ═══════════════════ CAMPEONATO OGURU ═══════════════════ */
+.subhead{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(1.4rem,4vw,1.8rem);color:var(--cream);margin:2.8rem 0 .4rem}
+.subhead + p{color:var(--muted)}
+
+.reserva-card{
+  max-width:420px;margin:2.2rem auto 0;border-radius:16px;overflow:hidden;
+  background:var(--noir-3);border:1px solid var(--line);box-shadow:var(--shadow);
+}
+.reserva-card img{width:100%;display:block}
+.reserva-card figcaption{
+  padding:.9rem 1.1rem;font-family:'Cormorant Garamond',serif;font-style:italic;
+  color:var(--blush);font-size:1.05rem;text-align:center;
+}
+
+.champ-wrap{margin-top:1.2rem;overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--noir-3)}
+.champ{width:100%;border-collapse:collapse;min-width:480px}
+.champ th{
+  text-align:left;padding:.9rem 1.1rem;font-family:'Jost',sans-serif;font-weight:500;
+  font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+  background:rgba(58,21,35,.55);border-bottom:1px solid var(--line);white-space:nowrap;
+}
+.champ td{padding:.7rem 1.1rem;border-bottom:1px solid rgba(228,199,160,.08);color:var(--blush);font-size:.97rem}
+.champ tbody tr:last-child td{border-bottom:none}
+.champ tbody tr:hover{background:rgba(200,84,122,.07)}
+.champ td.pts{text-align:center;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.35rem;color:var(--rose);width:1%;white-space:nowrap}
+.champ td.how{color:var(--muted);font-size:.88rem;white-space:nowrap}
+.champ tr.zero td{opacity:.55}
+
+.rules{counter-reset:regra;margin-top:1.2rem}
+.rule{display:flex;align-items:flex-start;gap:1rem;padding:1rem 0;border-bottom:1px solid rgba(228,199,160,.1)}
+.rule:last-child{border-bottom:none}
+.rule::before{
+  counter-increment:regra;content:counter(regra);
+  font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.5rem;color:var(--rose);
+  min-width:1.7rem;line-height:1.1;
+}
+.rule p{color:var(--blush);font-size:1.02rem}
+
+.scale{display:grid;gap:.7rem;margin-top:1.2rem}
+.scale-row{display:flex;align-items:baseline;gap:1rem;padding:.75rem 1.1rem;border:1px solid var(--line);border-radius:12px;background:var(--noir-3)}
+.scale-row .p{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.4rem;color:var(--rose);min-width:4.6rem;white-space:nowrap}
+.scale-row .d{color:var(--blush);font-size:.98rem}
+
+.example{margin-top:1.6rem;padding:clamp(1.3rem,4vw,1.8rem);border-radius:16px;border:1px dashed rgba(228,199,160,.32);background:linear-gradient(150deg,var(--noir-3),var(--wine))}
+.example .calc{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--blush);line-height:1.6}
+.example .total{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:2.1rem;color:var(--rose);margin-top:.5rem}
+
 /* ═══════════════════ RESPONSIVO ═══════════════════ */
 @media(max-width:640px){
   .chapter{padding:5rem 1.2rem 7rem}
   .reasons-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
   .gallery{columns:2}
+  .scale-row{flex-direction:column;gap:.2rem}
+  .scale-row .p{min-width:0}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:.001ms!important;transition-duration:.1ms!important}
@@ -353,10 +402,10 @@ p.lead{font-size:1.06rem;color:var(--muted);max-width:60ch;margin-bottom:1.4rem}
 
   <!-- ══════════════ IV · 100 MOTIVOS ══════════════ -->
   <!-- EDITAR: a lista está no JavaScript, procure por "const motivos" -->
-  <section id="motivos" class="chapter" data-title="100 motivos">
+  <section id="motivos" class="chapter" data-title="120 motivos">
     <div class="eyebrow">Capítulo IV</div>
-    <h2 class="title">100 motivos <em>que eu te amo</em></h2>
-    <p class="lead">Toca em cada cartinha pra descobrir. São cem e ainda assim faltam.</p>
+    <h2 class="title">120 motivos <em>que eu te amo</em></h2>
+    <p class="lead">Toca em cada cartinha pra descobrir. Eram cem, viraram cento e vinte — e ainda assim faltam.</p>
     <div class="reasons-grid" id="reasons"></div>
   </section>
 
@@ -388,6 +437,10 @@ p.lead{font-size:1.06rem;color:var(--muted);max-width:60ch;margin-bottom:1.4rem}
       <div class="card"><div class="k">22.12 · Academia</div><h4>Nossa volta</h4><p>Eu no seu horário, você no meu. Dois teimosos escolhendo um ao outro de novo.</p></div>
       <div class="card"><div class="k">Zdeli</div><h4>O pedido</h4><p>Onde eu criei coragem e te pedi em namoro. Meu coração quase saiu pela boca.</p></div>
       <div class="card"><div class="k">06.03.2026</div><h4>O começo de nós</h4><p>O primeiro dia da gente oficialmente. O melhor "sim" que eu já ouvi.</p></div>
+      <div class="card"><div class="k">Primeiro emprego</div><h4>A minha primeira entrevista</h4><p>Você achou a vaga, me conectou com a pessoa certa e ainda segurou a minha mão em cada etapa do processo. Antes de qualquer resultado, você já era a minha fã número um.</p></div>
+      <div class="card"><div class="k">Primeiro mês de estágio</div><h4>Crescer com você do lado</h4><p>Foi o mês em que eu mais amadureci na vida — e não foi sozinho. Você me ouviu, me acalmou e me empurrou pra frente. Nunca evoluí tanto em tão pouco tempo.</p></div>
+      <div class="card"><div class="k">Primeira viagem · Juquehy</div><h4>Quatro dias de sol e de nós</h4><p>Sol, mar, academia, comida demais e caminhadas sem hora pra acabar. Mas o que eu mais guardo é a gente deitado conversando sobre o <em>nosso</em> futuro.</p></div>
+      <div class="card"><div class="k">Primeira viagem · Campos do Jordão</div><h4>Friozinho, fondue e a gente</h4><p>Descemos da praia direto pro frio e continuamos: doces, chocolate, fondue e treino no meio disso tudo. Dias inteiros de só nós dois — e eu não queria mais nada.</p></div>
     </div>
   </section>
 
@@ -402,6 +455,8 @@ p.lead{font-size:1.06rem;color:var(--muted);max-width:60ch;margin-bottom:1.4rem}
       <div class="card"><div class="k">Onde tudo ficou sério</div><h4>Zdeli</h4><p>O lugar onde eu te pedi em namoro. Sempre vai ser especial pra mim.</p><a class="maps" href="#" target="_blank">Ver no mapa</a></div>
       <div class="card"><div class="k">A nossa praia</div><h4>Juquehy</h4><p>Areia, mar e você. Não preciso de mais nada.</p><a class="maps" href="#" target="_blank">Ver no mapa</a></div>
       <div class="card"><div class="k">Nosso respiro</div><h4>O parque</h4><p>Onde a gente desacelera o mundo e o tempo passa devagarzinho.</p><a class="maps" href="#" target="_blank">Ver no mapa</a></div>
+      <div class="card"><div class="k">O nosso friozinho</div><h4>Campos do Jordão</h4><p>Fondue, chocolate e a gente dividindo o mesmo casaco. Em poucos dias virou um lugar que é nosso.</p><a class="maps" href="#" target="_blank">Ver no mapa</a></div>
+      <div class="card"><div class="k">A minha promessa</div><h4>Disney</h4><p>A gente ainda não foi, mas já é nosso. Assim que eu conseguir, eu te levo — e o waffle do Mickey é por minha conta.</p><a class="maps" href="#" target="_blank">Ver no mapa</a></div>
     </div>
   </section>
 
@@ -411,6 +466,13 @@ p.lead{font-size:1.06rem;color:var(--muted);max-width:60ch;margin-bottom:1.4rem}
     <h2 class="title">Tudo que eu <em>quero viver</em> com você</h2>
     <p class="lead">Meu futuro inteiro tem um nome: Giuliana.</p>
     <div style="margin-top:2rem">
+      <div class="eyebrow">Curto prazo</div>
+      <div class="wish"><span class="star">✦</span><p>Fazer a tão esperada viagem pro Chile — a que a gente já viveu mil vezes só de conversar.</p></div>
+      <div class="wish"><span class="star">✦</span><p>Te levar pra Disney e comer o waffle do Mickey com você (dois waffles, sejamos honestos).</p></div>
+
+      <div class="eyebrow" style="margin-top:2.6rem">Longo prazo</div>
+      <div class="wish"><span class="star">✦</span><p>Aprender todas as suas linguagens do amor, pra que o nosso amor nunca vire cotidiano.</p></div>
+      <div class="wish"><span class="star">✦</span><p>Continuar, pela vida inteira, te surpreendendo com as pequenas e as grandes coisas.</p></div>
       <div class="wish"><span class="star">✦</span><p>Comprar a nossa casa, a nossa, com o nosso jeito, o nosso cheiro.</p></div>
       <div class="wish"><span class="star">✦</span><p>Construir uma família unida, onde ninguém solta a mão de ninguém.</p></div>
       <div class="wish"><span class="star">✦</span><p>Viajar o mundo com você, sem pressa, só a gente e cada lugar novo.</p></div>
@@ -430,6 +492,7 @@ p.lead{font-size:1.06rem;color:var(--muted);max-width:60ch;margin-bottom:1.4rem}
       <span class="tag big">amor</span>
       <span class="tag big">giu</span>
       <span class="tag big">principessa</span>
+      <span class="tag big">love</span>
     </div>
   </section>
 
@@ -444,8 +507,13 @@ p.lead{font-size:1.06rem;color:var(--muted);max-width:60ch;margin-bottom:1.4rem}
       <span class="tag">🌳 Ir no parque</span>
       <span class="tag">🌊 Praia (Juquehy)</span>
       <span class="tag">📺 How I Met Your Mother</span>
+      <span class="tag">🛋️ Friends</span>
+      <span class="tag">☕ Café no Central Perk (um dia)</span>
     </div>
-    <div class="body-txt" style="margin-top:2rem"><p>E se você me perguntar as coisas que <em>eu</em> amo em você, eu começo por três: a sua disciplina, o seu carinho e sim o seu shape. Mas a verdade é que a lista não acaba nunca.</p></div>
+    <div class="body-txt" style="margin-top:2rem">
+      <p>E se você me perguntar as coisas que <em>eu</em> amo em você, eu começo pelo jeito que você cuida de mim: o carinho, a atenção e o cuidado nos detalhes que ninguém mais teria comigo. Junta isso com a sua disciplina e — sim — com o seu shape, e mesmo assim a lista não acaba nunca.</p>
+      <p>E já que a gente fala em Friends: eu não preciso de sete temporadas pra entender o que o Ross demorou pra ver. <em>You're my lobster.</em> 🦞 Aqui não tem "we were on a break", não tem pausa, não tem plano B — tem eu e você no mesmo sofá, pela vida inteira.</p>
+    </div>
   </section>
 
   <!-- ══════════════ XI · CARTINHA ══════════════ -->
@@ -464,10 +532,106 @@ p.lead{font-size:1.06rem;color:var(--muted);max-width:60ch;margin-bottom:1.4rem}
     </div>
   </section>
 
-  <!-- ══════════════ XII · QUIZ ══════════════ -->
+  <!-- ══════════════ XII · CAMPEONATO OGURU ══════════════ -->
+  <!-- EDITAR: a tabela de pontos está logo abaixo, é só trocar os números -->
+  <section id="campeonato" class="chapter" data-title="Campeonato Oguru">
+    <div class="eyebrow">Capítulo XII</div>
+    <h2 class="title">Campeonato <em>Oguru</em></h2>
+    <p class="lead">A mesa está marcada e agora é oficial: a partir de hoje o nosso rodízio tem regra, tabela de pontos e um troféu invisível — mas muito disputado. Quem come mais, leva. 🏆</p>
+
+    <figure class="reserva-card">
+      <img src="imgs/reserva.jpeg" alt="Reserva no Oguru Sushi &amp; Bar — Itaim, 11/08/2026 às 12:00, 2 pessoas" loading="lazy">
+      <figcaption>Oguru Itaim · 11.08.2026 · meio-dia · mesa pra dois. Trate de chegar com fome, princesa. 😏</figcaption>
+    </figure>
+
+    <h3 class="subhead">A tabela oficial de pontos</h3>
+    <p>Cada item do Executivo vale o que está aqui. Sem discussão na hora — a tabela já estava escrita.</p>
+    <div class="champ-wrap">
+      <table class="champ">
+        <thead>
+          <tr><th>Categoria / item do Executivo</th><th>Pontos</th><th>Como contar</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>🍣 Sashimi de salmão</td><td class="pts">1</td><td class="how">cada fatia</td></tr>
+          <tr><td>🍣 Sashimi de atum</td><td class="pts">1</td><td class="how">cada fatia</td></tr>
+          <tr><td>🍣 Sashimi de robalo</td><td class="pts">1</td><td class="how">cada fatia</td></tr>
+          <tr><td>🍣 Sashimi de agulhão</td><td class="pts">1</td><td class="how">cada fatia</td></tr>
+          <tr><td>🍣 Sashimis variados do dia</td><td class="pts">1</td><td class="how">cada fatia</td></tr>
+          <tr><td>🔥 Sashimi maçaricado</td><td class="pts">1</td><td class="how">cada fatia</td></tr>
+          <tr><td>🍙 Nigiri de qualquer tipo</td><td class="pts">2</td><td class="how">cada unidade</td></tr>
+          <tr><td>🍱 Uramaki de qualquer tipo</td><td class="pts">2</td><td class="how">cada unidade</td></tr>
+          <tr><td>🍱 Baterá spicy salmão/atum</td><td class="pts">2</td><td class="how">cada unidade</td></tr>
+          <tr><td>🍱 Baterá Oguru</td><td class="pts">2</td><td class="how">cada unidade</td></tr>
+          <tr><td>🔥 Hot roll</td><td class="pts">2</td><td class="how">cada unidade</td></tr>
+          <tr><td>🍚 Crispy rice spicy salmon</td><td class="pts">2</td><td class="how">cada unidade</td></tr>
+          <tr><td>🍚 Crispy rice spicy tuna</td><td class="pts">2</td><td class="how">cada unidade</td></tr>
+          <tr><td>🌯 Temaki <strong>com</strong> arroz</td><td class="pts">4</td><td class="how">cada temaki inteiro</td></tr>
+          <tr><td>🌯 Temaki <strong>sem</strong> arroz</td><td class="pts">3</td><td class="how">cada temaki inteiro</td></tr>
+          <tr><td>🥟 Guioza</td><td class="pts">2</td><td class="how">cada unidade</td></tr>
+          <tr><td>🥟 Harumaki de legumes</td><td class="pts">2</td><td class="how">cada unidade</td></tr>
+          <tr><td>🥟 Pastel de shimeji</td><td class="pts">2</td><td class="how">cada unidade</td></tr>
+          <tr><td>🐟 Bolinho de salmão</td><td class="pts">2</td><td class="how">cada unidade</td></tr>
+          <tr><td>🌽 Tempurá de milho</td><td class="pts">2</td><td class="how">cada unidade</td></tr>
+          <tr><td>🥓 Bao de pancetta</td><td class="pts">3</td><td class="how">cada bao</td></tr>
+          <tr><td>🍄 Shimeji</td><td class="pts">3</td><td class="how">cada porção individual</td></tr>
+          <tr><td>🥒 Sunomono</td><td class="pts">1</td><td class="how">cada porção</td></tr>
+          <tr><td>🍜 Yakisoba</td><td class="pts">6</td><td class="how">cada porção</td></tr>
+          <tr><td>🐟 Salmão grelhado</td><td class="pts">5</td><td class="how">cada porção</td></tr>
+          <tr><td>🥩 Carpaccio de salmão trufado</td><td class="pts">3</td><td class="how">cada prato/porção</td></tr>
+          <tr><td>🐟 Peixe branco ao gazpacho</td><td class="pts">3</td><td class="how">cada prato/porção</td></tr>
+          <tr><td>🥣 Tartar de salmão + crispy</td><td class="pts">3</td><td class="how">cada porção</td></tr>
+          <tr class="zero"><td>🍨 Sobremesa</td><td class="pts">0</td><td class="how">não entra na disputa</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subhead">🍣 Os sushis que entram na regra de 2 pontos</h3>
+    <div class="body-txt">
+      <p>No Executivo aparecem, entre outros, uramaki de salmão e cebolinha, salmão skin com cream cheese, salmão com camarão empanado e cream cheese, salmão com abacate e soboro e atum spicy com ovas de tobiko. Também tem nigiri de salmão maçaricado, salmão maçaricado com alho, agulhão maçaricado, salmão skin, salmão, atum, agulhão, salmão trufado com massagô e peixes variados.</p>
+      <p>Pra mim faz sentido todos eles valerem 2 pontos: mesmo que alguns sejam um pouco menores, todos têm arroz e/ou complemento e representam claramente mais comida que uma única fatia de sashimi.</p>
+    </div>
+
+    <h3 class="subhead">🌯 Temaki: uma regra importante</h3>
+    <div class="body-txt">
+      <p>O cardápio tem temaki de salmão, atum, agulhão, camarão empanado, Califórnia, salmão skin e salmão grelhado, além das variações com cream cheese, maionese, spicy, crispy e cebolinha. A minha regra:</p>
+      <p><strong>Temaki com arroz = 4 pontos.</strong> <strong>Temaki sem arroz = 3 pontos.</strong></p>
+      <p>Isso evita a bizarrice de alguém pedir 10 temakis sem arroz e receber a mesma pontuação de quem encarou 10 cones completos. A opção sem arroz só existe no Sashimi Executivo.</p>
+    </div>
+
+    <h3 class="subhead">⚖️ As regras do juiz</h3>
+    <p>Pra não dar briga na mesa, ficam decretadas cinco regras:</p>
+    <div class="rules">
+      <div class="rule"><p>Só vale o que foi efetivamente engolido. Sobrou metade do temaki? Vale 2 pontos, não 4.</p></div>
+      <div class="rule"><p>Não vale "farmar" pontos com sobremesa, bebida, gengibre, wasabi ou shoyu.</p></div>
+      <div class="rule"><p>Porção compartilhada é dividida. Dividiram um yakisoba 50/50? 3 pontos para cada um.</p></div>
+      <div class="rule"><p>Se a cozinha mandar uma porção excepcionalmente pequena ou grande, o juiz pode ajustar em ±1 ponto.</p></div>
+      <div class="rule"><p>Pra ser realmente justo, todos os competidores pedem o mesmo rodízio — de preferência o Sashimi Executivo. Quem está no Sushi Executivo tem acesso a um conjunto diferente de itens.</p></div>
+    </div>
+
+    <h3 class="subhead">🥇 A escala rápida pra usar na mesa</h3>
+    <p>Pra ninguém precisar ficar olhando a tabela inteira de boca cheia:</p>
+    <div class="scale">
+      <div class="scale-row"><span class="p">1 ponto</span><span class="d">sashimi · sunomono</span></div>
+      <div class="scale-row"><span class="p">2 pontos</span><span class="d">sushi, nigiri, uramaki, hot roll, crispy rice, guioza, harumaki, bolinho</span></div>
+      <div class="scale-row"><span class="p">3 pontos</span><span class="d">bao, temaki sem arroz, shimeji, carpaccio/tartar/entrada fria</span></div>
+      <div class="scale-row"><span class="p">4 pontos</span><span class="d">temaki com arroz</span></div>
+      <div class="scale-row"><span class="p">5 pontos</span><span class="d">salmão grelhado</span></div>
+      <div class="scale-row"><span class="p">6 pontos</span><span class="d">yakisoba</span></div>
+    </div>
+
+    <div class="example">
+      <div class="k" style="font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem">Exemplo de rodada</div>
+      <p class="calc">12 sashimis + 8 nigiris + 6 uramakis + 2 temakis + 1 guioza<br>= 12 + 16 + 12 + 8 + 2</p>
+      <div class="total">= 50 pontos 🏆</div>
+    </div>
+
+    <p class="lead" style="margin-top:2rem;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--blush)">Que vença a melhor. (Spoiler: eu já sei que é você — mas eu vou dar trabalho.)</p>
+  </section>
+
+  <!-- ══════════════ XIII · QUIZ ══════════════ -->
   <!-- EDITAR: perguntas no JavaScript, procure por "const quiz" -->
   <section id="quiz" class="chapter" data-title="Quiz sobre nós">
-    <div class="eyebrow">Capítulo XII</div>
+    <div class="eyebrow">Capítulo XIII</div>
     <h2 class="title">Quiz <em>sobre a gente</em></h2>
     <p class="lead">Vamos ver o quanto você lembra da nossa história. 😏</p>
     <div class="quiz-card" id="quizCard">
@@ -477,10 +641,10 @@ p.lead{font-size:1.06rem;color:var(--muted);max-width:60ch;margin-bottom:1.4rem}
     </div>
   </section>
 
-  <!-- ══════════════ XIII · SURPRESA FINAL ══════════════ -->
+  <!-- ══════════════ XIV · SURPRESA FINAL ══════════════ -->
   <!-- EDITAR: a mensagem final aparece ao clicar no botão -->
   <section id="surpresa" class="chapter" data-title="A surpresa">
-    <div class="eyebrow">Capítulo XIII</div>
+    <div class="eyebrow">Capítulo XIV</div>
     <h2 class="title">Ainda tem <em>mais uma coisa</em></h2>
     <p class="lead">Eu guardei o mais importante pro final. Respira fundo e clica aqui embaixo.</p>
     <button class="btn reveal-btn" id="revealBtn" onclick="reveal()">Clique aqui ❤</button>
@@ -549,7 +713,29 @@ const motivos = [
 "A sua disciplina","O seu carinho","O seu shape 😏",
 "O quanto você acredita que a gente tem algo real","Como você nunca me fez sentir pequeno",
 "O quanto você me faz querer lutar pela gente","A forma como você ama, diferente de tudo",
-"O quanto eu me sinto sortudo por ser escolhido por você","O simples fato de que você existe — e é minha"
+"O quanto eu me sinto sortudo por ser escolhido por você","O simples fato de que você existe — e é minha",
+
+// ── os 20 motivos novos (olhos, resiliência/disciplina e o nosso futuro) ──
+"Os seus olhos — eu me perdi neles antes até de saber o seu nome",
+"O jeito que os seus olhos sorriem antes da sua boca",
+"A cor dos seus olhos quando bate a luz do fim de tarde",
+"Como os seus olhos me procuram no meio de qualquer lugar cheio",
+"Quando você me olha e eu esqueço o que eu ia falar",
+"Os seus olhos marejados quando você fala do que importa de verdade",
+"Como eu leio o seu dia inteiro só de olhar nos seus olhos",
+"O primeiro olhar seu de manhã — meu lugar favorito do mundo",
+"A sua resiliência: você cai, levanta e ainda arruma força pra sorrir",
+"A disciplina que você tem com o trabalho, mesmo nos dias mais pesados",
+"Como você entrega o seu melhor mesmo quando ninguém está olhando",
+"O jeito que você nunca usa o cansaço como desculpa",
+"Como você transforma pressão em resultado, sempre",
+"O orgulho que eu sinto de te ver crescendo na sua carreira",
+"Quando você diz \"a gente\" falando do futuro",
+"Imaginar a nossa casa e você fazendo café de manhã",
+"Saber que os meus melhores dias ainda vão ser do seu lado",
+"Pensar nos nossos filhos e já querer que eles tenham os seus olhos",
+"Planejar viagem com você e já ser feliz antes mesmo de viajar",
+"A certeza de que eu quero envelhecer olhando dentro desses olhos"
 ];
 
 // EDITAR: perguntas do quiz. A opção correta é sempre a primeira da lista "opts";
@@ -559,9 +745,12 @@ const quiz = [
  {q:"Onde eu te pedi em namoro?", opts:["No Zdeli","No Oguru","Na praia","Em casa"]},
  {q:"Qual é o nosso rodízio de sushi?", opts:["Oguru","Zdeli","Um japonês qualquer","Não temos"]},
  {q:"Qual é a nossa praia?", opts:["Juquehy","Maresias","Guarujá","Ubatuba"]},
- {q:"Qual série você ama?", opts:["How I Met Your Mother","Friends","The Office","Grey's Anatomy"]},
+ {q:"Qual série você ama desde sempre?", opts:["How I Met Your Mother","Stranger Things","The Office","Grey's Anatomy"]},
+ {q:"Em Friends, o que eu digo que você é pra mim?", opts:["A minha lobster 🦞","A minha Rachel","A minha Phoebe","A minha Janice"]},
  {q:"Qual é a nossa música?", opts:["The First Time — Damiano David","Perfect — Ed Sheeran","Outra qualquer","Não temos"]},
- {q:"Quando a gente começou a namorar?", opts:["06/03/2026","15/07/2025","22/12/2025","01/01/2026"]}
+ {q:"Quando a gente começou a namorar?", opts:["06/03/2026","15/07/2025","22/12/2025","01/01/2026"]},
+ {q:"Pra onde eu prometi te levar pra comer waffle do Mickey?", opts:["Disney","Chile","Campos do Jordão","Juquehy"]},
+ {q:"Quantos pontos vale um temaki COM arroz no Campeonato Oguru?", opts:["4 pontos","2 pontos","3 pontos","6 pontos"]}
 ];
 
 // EDITAR: data em que começaram a namorar (ano, mês-1, dia)  →  06/03/2026
@@ -593,7 +782,7 @@ function updateChrome(){
 }
 
 /* ═══════════════════ ÍNDICE (menu) ═══════════════════ */
-const romanos = ['','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV'];
+const romanos = ['','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX'];
 const index = document.getElementById('index');
 chapters.forEach((ch,i)=>{
   if(i===0) return; // pula a página inicial

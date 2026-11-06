@@ -611,6 +611,30 @@ details.fold[open] summary::after{transform:rotate(45deg)}
 .jogador .soma button:hover{border-color:var(--salmao)}
 .jogador .soma button:active{transform:scale(.94)}
 .jogador .soma button.menos{color:var(--texto-2)}
+/* marcador de pratos: escolhe quem comeu e toca no prato */
+.quem-comeu{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.35rem;margin-top:1.2rem;padding:.3rem;border-radius:14px;border:1px solid var(--fio);background:var(--laca)}
+.quem-comeu button{min-height:48px;border-radius:10px;border:0;background:none;color:var(--texto-2);font-family:var(--sans);font-weight:700;font-size:.95rem;cursor:pointer;transition:background .25s,color .25s}
+.quem-comeu button small{display:block;font-weight:400;font-size:.72rem;letter-spacing:.06em}
+.quem-comeu button[aria-pressed="true"]{background:var(--salmao);color:var(--laca)}
+.metade{display:flex;align-items:center;gap:.6rem;margin-top:.7rem;min-height:44px;padding:.4rem .9rem;border-radius:100px;border:1px dashed var(--fio-forte);background:none;color:var(--texto-2);font-family:var(--sans);font-size:.88rem;cursor:pointer}
+.metade[aria-pressed="true"]{border-style:solid;border-color:var(--ouro);color:var(--ouro-claro);background:rgba(201,163,94,.1)}
+.pratos{margin-top:.9rem;display:grid;gap:.9rem}
+.pratos h4{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;color:var(--ouro);margin-bottom:.45rem}
+.pratos .grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:.45rem}
+.prato-btn{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:.1rem;min-height:58px;padding:.6rem .75rem;border-radius:12px;border:1px solid var(--fio);background:var(--laca-2);color:var(--texto);font-family:var(--sans);font-size:.92rem;line-height:1.25;text-align:left;cursor:pointer;transition:border-color .2s,transform .12s,background .2s}
+.prato-btn:hover{border-color:var(--salmao)}
+.prato-btn:active{transform:scale(.96);background:var(--laca-3)}
+.prato-btn .v{font-size:.78rem;color:var(--salmao);font-weight:700}
+.prato-btn .qtd{position:absolute;top:-.45rem;right:-.35rem;min-width:1.5rem;height:1.5rem;padding:0 .35rem;border-radius:100px;display:grid;place-items:center;font-size:.75rem;font-weight:700;background:var(--salmao);color:var(--laca)}
+.prato-btn .qtd:empty{display:none}
+.ultimo{display:flex;align-items:center;justify-content:space-between;gap:.8rem;margin-top:.9rem;min-height:52px;padding:.5rem .6rem .5rem 1rem;border-radius:12px;border:1px solid var(--fio);background:var(--laca-2);font-size:.9rem;color:var(--texto-2)}
+.ultimo b{color:var(--texto);font-weight:500}
+.ultimo .btn{flex:none}
+.jogador .lista{margin-top:.6rem;text-align:left;font-size:.82rem;line-height:1.55;color:var(--texto-2);min-height:1.2rem}
+.jogador .lista span{display:flex;justify-content:space-between;gap:.5rem}
+.jogador .ajuste{display:flex;justify-content:center;gap:.4rem;margin-top:.6rem}
+.jogador .ajuste button{min-width:44px;min-height:36px;border-radius:9px;border:1px solid var(--fio);background:none;color:var(--texto-2);font-family:var(--sans);font-size:.85rem;cursor:pointer}
+.jogador .ajuste button:hover{border-color:var(--ouro);color:var(--ouro-claro)}
 .placar-acoes{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1rem}
 .placar-nota{margin-top:.7rem;font-size:.86rem;color:var(--texto-2)}
 .hall{margin-top:1rem;display:grid;gap:.5rem}
@@ -963,13 +987,25 @@ details.fold[open] summary::after{transform:rotate(45deg)}
     <p class="og-cd-msg" id="ogCdMsg">Aquece o estômago, princesa.</p>
 
     <h3 class="subhead">O placar ao vivo</h3>
-    <p>Abre essa página no celular lá na mesa e vai marcando. Ele fica salvo, mesmo se fechar o site.</p>
+    <p>Abre essa página no celular lá na mesa. Escolhe quem comeu, toca no prato e pronto: o site faz a conta pela tabela. Fica tudo salvo, mesmo se fechar.</p>
     <div class="placar">
       <div class="jogador" id="jog-giu"><div class="quem">Giu</div><div class="pts" id="pts-giu" aria-live="polite">0</div>
-        <div class="soma" data-p="giu"><button type="button" data-v="1">+1</button><button type="button" data-v="2">+2</button><button type="button" data-v="3">+3</button><button type="button" data-v="4">+4</button><button type="button" data-v="5">+5</button><button type="button" data-v="6">+6</button><button type="button" class="menos" data-v="-1" aria-label="tirar 1 ponto da Giu">−1</button></div></div>
+        <div class="lista" id="lista-giu"></div>
+        <div class="ajuste"><button type="button" data-aj="giu" data-v="-1" aria-label="juiz tira 1 ponto da Giu">−1</button><button type="button" data-aj="giu" data-v="1" aria-label="juiz dá 1 ponto pra Giu">+1</button></div></div>
       <div class="jogador" id="jog-leo"><div class="quem">Leo</div><div class="pts" id="pts-leo" aria-live="polite">0</div>
-        <div class="soma" data-p="leo"><button type="button" data-v="1">+1</button><button type="button" data-v="2">+2</button><button type="button" data-v="3">+3</button><button type="button" data-v="4">+4</button><button type="button" data-v="5">+5</button><button type="button" data-v="6">+6</button><button type="button" class="menos" data-v="-1" aria-label="tirar 1 ponto do Leo">−1</button></div></div>
+        <div class="lista" id="lista-leo"></div>
+        <div class="ajuste"><button type="button" data-aj="leo" data-v="-1" aria-label="juiz tira 1 ponto do Leo">−1</button><button type="button" data-aj="leo" data-v="1" aria-label="juiz dá 1 ponto pro Leo">+1</button></div></div>
     </div>
+
+    <div class="quem-comeu" role="group" aria-label="Quem comeu">
+      <button type="button" data-quem="giu" aria-pressed="true">Giu</button>
+      <button type="button" data-quem="leo" aria-pressed="false">Leo</button>
+      <button type="button" data-quem="ambos" aria-pressed="false">dividido<small>metade pra cada</small></button>
+    </div>
+    <button class="metade" type="button" id="soMetade" aria-pressed="false">½ comeu só metade (vale pro próximo prato)</button>
+    <div class="pratos" id="pratos"></div>
+    <div class="ultimo"><span id="ultimoTxt">Nenhum prato marcado ainda.</span><button class="btn ghost small" type="button" id="desfazer" disabled>desfazer</button></div>
+
     <div class="placar-acoes">
       <button class="btn small" type="button" id="encerrarRodada">encerrar rodada</button>
       <button class="btn ghost small" type="button" id="zerarPlacar">zerar placar</button>
@@ -2022,34 +2058,118 @@ function oguruTick(){
   }
 }
 
-let placar = lerSalvo('giu-oguru-placar', {giu:0, leo:0});
+// EDITAR: os pratos do marcador, com os pontos da tabela (cada toque = 1 unidade/fatia/porção)
+const pratosOguru = [
+  {pts:1, itens:['Sashimi (fatia)','Sunomono']},
+  {pts:2, itens:['Nigiri','Uramaki','Hot roll','Baterá','Crispy rice','Guioza','Harumaki','Pastel de shimeji','Bolinho de salmão','Tempurá de milho']},
+  {pts:3, itens:['Temaki sem arroz','Bao de pancetta','Shimeji','Carpaccio trufado','Tartar + crispy','Peixe ao gazpacho']},
+  {pts:4, itens:['Temaki com arroz']},
+  {pts:5, itens:['Salmão grelhado']},
+  {pts:6, itens:['Yakisoba']}
+];
+const nomeJog = {giu:'Giu', leo:'Leo'};
+// cada toque vira um lançamento; o placar é a soma deles (assim dá pra desfazer)
+let rodada = lerSalvo('giu-oguru-rodada', []);
+let quem = 'giu', soMetade = false;
+const fmt = n => String(Math.round(n*10)/10).replace('.', ',');
+function totais(){
+  const t = {giu:0, leo:0}, itens = {giu:{}, leo:{}};
+  rodada.forEach(l=>{
+    t[l.p] += l.pts;
+    if(l.item){ itens[l.p][l.item] = (itens[l.p][l.item]||0) + (l.frac||1); }
+  });
+  return {t, itens};
+}
+// mantém o mesmo formato de antes pro "encerrar rodada"
+let placar = {giu:0, leo:0};
+function renderPlacar(){
+  const {t, itens} = totais();
+  placar = t;
+  ['giu','leo'].forEach(p=>{
+    document.getElementById('pts-'+p).textContent = fmt(t[p]);
+    document.getElementById('jog-'+p).classList.toggle('na-frente', t[p] > t[p==='giu'?'leo':'giu']);
+    document.getElementById('lista-'+p).innerHTML = Object.entries(itens[p])
+      .map(([n,q])=>'<span><span>'+fmt(q)+'× '+n+'</span></span>').join('');
+  });
+  // bolinha com quantos daquele prato a pessoa escolhida já comeu
+  document.querySelectorAll('.prato-btn').forEach(b=>{
+    const alvo = quem === 'ambos' ? null : itens[quem][b.dataset.item];
+    b.querySelector('.qtd').textContent = alvo ? fmt(alvo) : '';
+  });
+  const u = rodada[rodada.length-1];
+  document.getElementById('ultimoTxt').innerHTML = u
+    ? 'Último: <b>'+(u.item ? u.item : 'ajuste do juiz')+'</b> · '+(u.grupo || (nomeJog[u.p]+' '+(u.pts>0?'+':'')+fmt(u.pts)))
+    : 'Nenhum prato marcado ainda.';
+  document.getElementById('desfazer').disabled = !rodada.length;
+}
+function lancar(l){ rodada.push(l); salvar('giu-oguru-rodada', rodada); renderPlacar(); if(navigator.vibrate) navigator.vibrate(12); }
+
+(function montarPratos(){
+  const box = document.getElementById('pratos');
+  pratosOguru.forEach(g=>{
+    const sec = document.createElement('div');
+    sec.innerHTML = '<h4>'+g.pts+' '+(g.pts===1?'ponto':'pontos')+'</h4>';
+    const grade = document.createElement('div'); grade.className = 'grade';
+    g.itens.forEach(nome=>{
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'prato-btn'; b.dataset.item = nome; b.dataset.pts = g.pts;
+      b.innerHTML = '<span>'+nome+'</span><span class="v">+'+g.pts+'</span><span class="qtd"></span>';
+      grade.appendChild(b);
+    });
+    sec.appendChild(grade); box.appendChild(sec);
+  });
+  box.addEventListener('click', e=>{
+    const b = e.target.closest('.prato-btn'); if(!b) return;
+    const base = Number(b.dataset.pts), item = b.dataset.item;
+    const frac = soMetade ? .5 : 1;
+    if(quem === 'ambos'){
+      // porção dividida: metade dos pontos pra cada um (regra 3)
+      const grupo = 'dividido · '+fmt(base*frac/2)+' pra cada';
+      rodada.push({p:'giu', item, pts:base*frac/2, frac:frac/2, grupo});
+      lancar({p:'leo', item, pts:base*frac/2, frac:frac/2, grupo, par:true});
+    } else {
+      lancar({p:quem, item, pts:base*frac, frac});
+    }
+    if(typeof burstAt === 'function') burstAt(b, 4);
+    if(soMetade){ soMetade = false; document.getElementById('soMetade').setAttribute('aria-pressed','false'); }
+  });
+})();
+document.querySelectorAll('.quem-comeu button').forEach(b=>{
+  b.onclick = ()=>{
+    quem = b.dataset.quem;
+    document.querySelectorAll('.quem-comeu button').forEach(x=>x.setAttribute('aria-pressed', x===b ? 'true' : 'false'));
+    renderPlacar();
+  };
+});
+document.getElementById('soMetade').onclick = e=>{
+  soMetade = !soMetade; e.currentTarget.setAttribute('aria-pressed', soMetade ? 'true' : 'false');
+};
+document.querySelectorAll('.ajuste button').forEach(b=>{
+  // ajuste do juiz: porção muito pequena ou muito grande (regra 4)
+  b.onclick = ()=>{
+    const p = b.dataset.aj, v = Number(b.dataset.v);
+    if(v < 0 && placar[p] <= 0) return;
+    lancar({p, pts:v});
+  };
+});
+document.getElementById('desfazer').onclick = ()=>{
+  const u = rodada.pop();
+  if(u && u.par) rodada.pop(); // dividido: desfaz as duas metades juntas
+  salvar('giu-oguru-rodada', rodada); renderPlacar();
+};
+
 // EDITAR: rodadas antigas; as novas entram pelo botão "encerrar rodada"
 const hallFixo = [{dt:'jul e out 2026', txt:'Rodadas de treino. Teve muito sushi, mas sem tabela não conta: o juiz ainda não existia.'}];
-function renderPlacar(){
-  document.getElementById('pts-giu').textContent = placar.giu;
-  document.getElementById('pts-leo').textContent = placar.leo;
-  document.getElementById('jog-giu').classList.toggle('na-frente', placar.giu > placar.leo);
-  document.getElementById('jog-leo').classList.toggle('na-frente', placar.leo > placar.giu);
-}
 function renderHall(){
   const rodadas = lerSalvo('giu-oguru-hall', []);
   let h = hallFixo.map(r=>'<div class="hall-row"><span class="dt">'+r.dt+'</span><span class="res">'+r.txt+'</span></div>').join('');
   rodadas.forEach(r=>{
     const venc = r.giu > r.leo ? '<b>Giu</b> venceu' : r.leo > r.giu ? '<b>Leo</b> venceu' : '<b>Empate</b>';
-    h += '<div class="hall-row"><span class="dt">'+r.dt+'</span><span class="res">'+venc+' · Giu '+r.giu+' × '+r.leo+' Leo</span></div>';
+    h += '<div class="hall-row"><span class="dt">'+r.dt+'</span><span class="res">'+venc+' · Giu '+fmt(r.giu)+' × '+fmt(r.leo)+' Leo</span></div>';
   });
   if(!rodadas.length) h += '<div class="hall-row pendente"><span class="dt">10.11.2026</span><span class="res">1ª edição oficial · campeã a definir</span></div>';
   document.getElementById('hall').innerHTML = h;
 }
-document.querySelectorAll('.placar .soma').forEach(g=>{
-  g.addEventListener('click', e=>{
-    const b = e.target.closest('button'); if(!b) return;
-    const v = Number(b.dataset.v);
-    placar[g.dataset.p] = Math.max(0, placar[g.dataset.p] + v);
-    salvar('giu-oguru-placar', placar); renderPlacar();
-    if(v > 0 && typeof burstAt === 'function') burstAt(b, 5);
-  });
-});
 const placarNota = document.getElementById('placarNota');
 const placarNotaTxt = placarNota.textContent;
 let zerarArmado = false, zerarTimer;
@@ -2062,7 +2182,7 @@ document.getElementById('zerarPlacar').onclick = ()=>{
     return;
   }
   zerarArmado = false; clearTimeout(zerarTimer);
-  placar = {giu:0, leo:0}; salvar('giu-oguru-placar', placar); renderPlacar();
+  rodada = []; salvar('giu-oguru-rodada', rodada); renderPlacar();
   placarNota.textContent = 'Placar zerado. Bora de novo!';
 };
 document.getElementById('encerrarRodada').onclick = ()=>{
@@ -2075,7 +2195,7 @@ document.getElementById('encerrarRodada').onclick = ()=>{
   placarNota.textContent = placar.giu > placar.leo ? 'Campeã! Eu falei que era você.'
                          : placar.leo > placar.giu ? 'Dessa vez foi minha. Revanche marcada?'
                          : 'Empate! O amor venceu.';
-  placar = {giu:0, leo:0}; salvar('giu-oguru-placar', placar);
+  rodada = []; salvar('giu-oguru-rodada', rodada);
   renderPlacar(); renderHall();
 };
 renderPlacar(); renderHall();

@@ -8,10 +8,11 @@ const ID_OK = /^[A-Za-z0-9]{22}$/;
 
 async function idsNaPlaylist() {
   const ids = new Set();
-  let url = '/playlists/' + PLAYLIST + '/tracks?fields=next,items(track(id))&limit=100';
+  // desde fev/2026 o Spotify chama isso de /items (antes era /tracks) e cada entrada vem em 'item'
+  let url = '/playlists/' + PLAYLIST + '/items?fields=next,items(item(id),track(id))&limit=50';
   for (let pag = 0; url && pag < 10; pag++) {
     const j = await spotify(url);
-    (j.items || []).forEach(i => i.track && i.track.id && ids.add(i.track.id));
+    (j.items || []).forEach(i => { const t = i.item || i.track; if (t && t.id) ids.add(t.id); });
     url = j.next ? j.next.replace('https://api.spotify.com/v1', '') : null;
   }
   return ids;
@@ -36,8 +37,8 @@ module.exports = async (req, res) => {
     if (req.method === 'GET') {
       const q = String((req.query && req.query.q) || '').trim().slice(0, 80);
       if (!q) {
-        const p = await spotify('/playlists/' + PLAYLIST + '?fields=name,public,tracks(total),external_urls');
-        return res.status(200).json({ configured: true, id: PLAYLIST, nome: p.name, publica: p.public !== false, total: p.tracks && p.tracks.total, url: p.external_urls && p.external_urls.spotify });
+        const p = await spotify('/playlists/' + PLAYLIST + '?fields=name,public,items(total),tracks(total),external_urls');
+        return res.status(200).json({ configured: true, id: PLAYLIST, nome: p.name, publica: p.public !== false, total: (p.items && p.items.total) ?? (p.tracks && p.tracks.total), url: p.external_urls && p.external_urls.spotify });
       }
       const [busca, ja] = await Promise.all([
         spotify('/search?type=track&market=BR&limit=8&q=' + encodeURIComponent(q)),
@@ -57,7 +58,7 @@ module.exports = async (req, res) => {
       const { id } = await lerCorpo(req);
       if (!ID_OK.test(String(id || ''))) return res.status(400).json({ erro: 'id' });
       if ((await idsNaPlaylist()).has(id)) return res.status(200).json({ ok: true, jaEstava: true });
-      await spotify('/playlists/' + PLAYLIST + '/tracks', { method: 'POST', body: JSON.stringify({ uris: ['spotify:track:' + id] }) });
+      await spotify('/playlists/' + PLAYLIST + '/items', { method: 'POST', body: JSON.stringify({ uris: ['spotify:track:' + id] }) });
       return res.status(200).json({ ok: true });
     }
 

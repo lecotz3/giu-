@@ -370,6 +370,19 @@ p.lead{font-size:1.02rem;color:var(--texto-2);max-width:60ch;margin-bottom:1.2re
 .music-meta{padding:1.3rem 1.4rem 1.5rem}
 .spotify-card{margin-top:1rem;border-radius:14px;overflow:hidden;border:1px solid var(--fio);background:var(--laca-2);box-shadow:var(--sombra);min-height:352px}
 .spotify-card iframe{display:block;width:100%;height:352px;border:0}
+.pedir-musica{margin-top:1.2rem;padding:1.1rem;border-radius:14px;border:1px solid var(--fio);background:var(--laca-2)}
+.pedir-musica label{display:block;font-family:var(--serif);font-weight:600;font-size:1.08rem;margin-bottom:.6rem}
+.pedir-musica input{width:100%;min-height:48px;padding:0 1rem;border-radius:100px;border:1px solid var(--fio-forte);background:var(--laca);color:var(--texto);font:inherit;font-size:16px}
+.pedir-musica input:focus{outline:2px solid var(--salmao);outline-offset:2px}
+.resultados{list-style:none;margin:.8rem 0 0;padding:0;display:grid;gap:.4rem}
+.resultados li{display:flex;align-items:center;gap:.75rem;padding:.45rem;border-radius:10px;background:rgba(255,255,255,.025)}
+.resultados img,.resultados .sem-capa{width:48px;height:48px;border-radius:6px;flex:none;object-fit:cover;background:var(--laca-3)}
+.resultados .info{flex:1;min-width:0}
+.resultados .nome{display:block;font-weight:700;color:var(--texto);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.resultados .art{display:block;font-size:.84rem;color:var(--texto-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.resultados button{flex:none;min-height:44px}
+.resultados button:disabled{opacity:.6;cursor:default;transform:none}
+.musica-nota{margin-top:.6rem;font-size:.88rem;color:var(--texto-2);min-height:1.2em}
 .music-meta .song{font-family:var(--serif);font-weight:600;font-size:1.55rem;line-height:1.2}
 .music-meta .artist{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ouro);margin:.3rem 0 .9rem}
 .music-meta .note{font-family:var(--serif);font-size:1.05rem;color:var(--texto);max-width:52ch}
@@ -908,15 +921,20 @@ details.fold[open] summary::after{transform:rotate(45deg)}
       </div>
     </div>
 
-    <!-- EDITAR: a playlist do Spotify (troca o id depois de /playlist/).
-         Está escondida porque a playlist ficou privada no Spotify: deixa ela pública e apaga o "hidden" da linha de baixo
-         (e troca o data-band do capítulo pra "duas faixas e uma playlist"). -->
-    <div id="playlist" hidden>
-    <h3 class="subhead">A nossa playlist</h3>
-    <p>A que eu te mandei em junho. Dá play quando bater saudade.</p>
-    <div class="spotify-card">
-      <iframe src="https://open.spotify.com/embed/playlist/7vNHWDAHDk8kgsJvIHQhhH?utm_source=generator&amp;theme=0" title="Playlist I think I miss my wife, no Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-    </div>
+    <!-- A playlist e a busca só aparecem quando o Spotify está ligado na Vercel (api/spotify.js).
+         EDITAR: pra trocar de playlist, muda SPOTIFY_PLAYLIST_ID na Vercel. -->
+    <div class="playlist" id="playlist" hidden>
+      <h3 class="subhead">A nossa playlist</h3>
+      <p>A que eu te mandei em junho. Agora ela é das duas mãos: achou uma música que é a nossa cara, coloca aqui.</p>
+      <div class="spotify-card" id="spotifyCard" hidden>
+        <iframe id="spotifyFrame" title="A nossa playlist no Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+      </div>
+      <div class="pedir-musica">
+        <label for="buscaMusica">Colocar uma música na playlist</label>
+        <input id="buscaMusica" type="search" placeholder="nome da música ou do artista" autocomplete="off" enterkeyhint="search" maxlength="80">
+        <ul class="resultados" id="resultadosMusica" aria-live="polite"></ul>
+        <p class="musica-nota" id="musicaNota" aria-live="polite"></p>
+      </div>
     </div>
   </section>
 
@@ -2503,7 +2521,74 @@ async function ligarTilt(){
   }
 }
 
+/* ── a playlist que a Giu também enche ── */
+let spotifyChecado = false;
+async function ligarPlaylist(){
+  if(spotifyChecado) return; spotifyChecado = true;
+  let info;
+  try{
+    const r = await fetch('/api/spotify', {cache:'no-store'});
+    if(!r.ok) return; // Spotify ainda não ligado: o bloco continua escondido
+    info = await r.json();
+  }catch(e){ spotifyChecado = false; return; }
+  document.getElementById('playlist').hidden = false;
+  if(info.publica){
+    document.getElementById('spotifyFrame').src = 'https://open.spotify.com/embed/playlist/'+info.id+'?utm_source=generator&theme=0';
+    document.getElementById('spotifyCard').hidden = false;
+  }
+}
+const buscaMusica = document.getElementById('buscaMusica');
+const resultadosMusica = document.getElementById('resultadosMusica');
+const musicaNota = document.getElementById('musicaNota');
+let buscaTimer, buscaN = 0;
+const escHtml = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+async function buscarMusicas(){
+  const q = buscaMusica.value.trim();
+  const n = ++buscaN;
+  if(q.length < 2){ resultadosMusica.innerHTML = ''; musicaNota.textContent = ''; return; }
+  musicaNota.textContent = 'procurando…';
+  try{
+    const r = await fetch('/api/spotify?q='+encodeURIComponent(q), {cache:'no-store'});
+    if(n !== buscaN) return; // chegou uma busca mais nova
+    if(!r.ok) throw new Error();
+    const {musicas} = await r.json();
+    musicaNota.textContent = musicas.length ? '' : 'Não achei nada com esse nome.';
+    resultadosMusica.innerHTML = musicas.map(m =>
+      '<li>'+(m.capa ? '<img src="'+escHtml(m.capa)+'" alt="" width="48" height="48" loading="lazy">' : '<span class="sem-capa"></span>')+
+      '<span class="info"><span class="nome">'+escHtml(m.nome)+'</span><span class="art">'+escHtml(m.artistas)+'</span></span>'+
+      '<button class="btn small'+(m.naPlaylist?' ghost':'')+'" type="button" data-id="'+escHtml(m.id)+'"'+(m.naPlaylist?' disabled':'')+'>'+(m.naPlaylist?'já está':'colocar')+'</button></li>'
+    ).join('');
+  }catch(e){
+    if(n === buscaN) musicaNota.textContent = 'Não consegui falar com o Spotify agora. Tenta de novo daqui a pouco.';
+  }
+}
+buscaMusica.addEventListener('input', ()=>{ clearTimeout(buscaTimer); buscaTimer = setTimeout(buscarMusicas, 450); });
+buscaMusica.addEventListener('keydown', e=>{ if(e.key === 'Enter'){ e.preventDefault(); clearTimeout(buscaTimer); buscarMusicas(); buscaMusica.blur(); } });
+resultadosMusica.addEventListener('click', async e=>{
+  const b = e.target.closest('button[data-id]'); if(!b || b.disabled) return;
+  b.disabled = true; b.textContent = 'colocando…';
+  const nome = b.closest('li').querySelector('.nome').textContent;
+  try{
+    const r = await fetch('/api/spotify', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({id:b.dataset.id})});
+    const j = await r.json().catch(()=>({}));
+    if(!r.ok || !j.ok) throw new Error();
+    b.textContent = j.jaEstava ? 'já está' : 'colocada ❤'; b.classList.add('ghost');
+    musicaNota.textContent = j.jaEstava ? '"'+nome+'" já estava na playlist.' : '"'+nome+'" entrou na nossa playlist.';
+    if(!j.jaEstava){
+      burstAt(b, 10);
+      if(navigator.vibrate) navigator.vibrate(15);
+      // recarrega o player pra música nova aparecer
+      const f = document.getElementById('spotifyFrame');
+      if(f.src) setTimeout(()=>{ const s = f.src; f.src = 'about:blank'; f.src = s; }, 1200);
+    }
+  }catch(err){
+    b.disabled = false; b.textContent = 'colocar';
+    musicaNota.textContent = 'Não deu pra colocar agora. Tenta de novo?';
+  }
+});
+
 function aoAbrir(id){
+  if(id === 'musica') ligarPlaylist();
   if(id === 'cartinha') escreverCarta();
   if(id === 'fotos') ligarTilt();
   if(id === 'campeonato'){ puxarPlacar(); if(!reduzMovimento) loadScript(CDN.confete).catch(()=>{}); }

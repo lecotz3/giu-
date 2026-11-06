@@ -187,47 +187,46 @@ p.lead{font-size:1.02rem;color:var(--texto-2);max-width:60ch;margin-bottom:1.2re
 #inicio.active{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;min-height:100vh;min-height:100dvh;padding:0}
 .capa-hero{position:relative;flex:1;display:flex;flex-direction:column;justify-content:space-between;min-height:430px;overflow:hidden;isolation:isolate}
 .capa-foto{position:absolute;inset:0;z-index:-2;overflow:hidden;background:var(--laca)}
-.capa-foto img{width:100%;height:100%;object-fit:cover;object-position:58% 30%;filter:saturate(.92) contrast(1.04) brightness(.9);transform-origin:60% 32%;animation:kenburns 26s ease-in-out infinite alternate,fotoIn 1.6s var(--ease) both}
-@keyframes kenburns{from{transform:scale(1.02)}to{transform:scale(1.1)}}
+/* a foto é de flash: um pouco menos saturada e mais quente pra conversar com a laca */
+.capa-foto img{width:100%;height:100%;object-fit:cover;will-change:transform;object-position:62% 6%;filter:saturate(.82) sepia(.1) brightness(.84) contrast(1.06);transform-origin:64% 30%;animation:kenburns 30s ease-in-out infinite alternate,fotoIn 1.8s var(--ease) both}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.06)}}
 @keyframes fotoIn{from{opacity:0}to{opacity:1}}
-/* véu de laca: escurece embaixo pro texto e em cima pros rótulos */
 .capa-hero::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
   background:
-    linear-gradient(to top,var(--laca) 0%,rgba(18,10,11,.9) 22%,rgba(18,10,11,.45) 48%,rgba(18,10,11,.12) 68%,rgba(18,10,11,.55) 100%),
-    radial-gradient(120% 80% at 20% 100%,rgba(18,10,11,.55),transparent 60%)}
-.capa-hero .capa-top{padding:1.2rem 1.35rem 0;color:var(--ouro-claro);text-shadow:0 1px 8px rgba(0,0,0,.6)}
-.capa-texto{position:relative;width:100%;max-width:620px;padding:0 1.5rem 1.6rem;animation:chIn 1.1s .25s var(--ease) both}
-.capa-eyebrow{display:flex;align-items:center;gap:.7rem;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ouro-claro);margin-bottom:.7rem}
-.capa-eyebrow::after{content:'';width:44px;height:1px;background:var(--ouro)}
-.capa-nome{font-family:var(--serif);font-weight:600;font-size:clamp(3.4rem,15vw,6.6rem);line-height:.95;letter-spacing:-.02em;color:var(--texto);text-shadow:0 6px 30px rgba(0,0,0,.45)}
-.capa-frase{margin-top:1rem;max-width:30ch;font-family:var(--serif);font-weight:500;font-size:clamp(1.02rem,4.2vw,1.22rem);line-height:1.55;color:var(--texto)}
-.capa-acoes2{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.2rem;margin-top:1.5rem}
-.capa-comecar{border-radius:100px;padding:.85rem 1.6rem .85rem 1.8rem}
-.capa-comecar:hover{transform:translateY(-2px)}
-.capa-juntos{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--texto-2)}
-.capa-juntos b{color:var(--salmao);font-weight:700;font-variant-numeric:tabular-nums}
-.capa-texto .novidade{margin-top:.7rem;padding-left:0}
-/* o galho de sakura vira um enfeite discreto ao lado do nome (as flores ainda pulam no toque) */
-.capa-texto .makie{position:absolute;top:-5.2rem;left:.6rem;right:auto;width:min(40vw,170px);opacity:.95;transform:scaleX(-1)}
-@media(min-width:900px){
-  .capa-hero::before{background:
-    linear-gradient(to top,var(--laca) 0%,rgba(18,10,11,.7) 18%,transparent 45%),
-    linear-gradient(90deg,rgba(18,10,11,.92) 0%,rgba(18,10,11,.6) 34%,transparent 62%),
-    linear-gradient(to bottom,rgba(18,10,11,.5),transparent 18%)}
-  .capa-foto img{object-position:62% 32%}
-  .capa-texto{padding:0 0 3rem clamp(2.5rem,7vw,6rem)}
-  .capa-texto .makie{left:clamp(1.5rem,5vw,4.5rem);top:-6.2rem;width:190px}
+    linear-gradient(90deg,rgba(18,10,11,.96) 0%,rgba(18,10,11,.9) 28%,rgba(18,10,11,.62) 40%,rgba(18,10,11,.2) 52%,transparent 64%),
+    linear-gradient(to top,var(--laca) 0%,rgba(18,10,11,.5) 14%,transparent 34%),
+    linear-gradient(to bottom,rgba(18,10,11,.55),transparent 16%)}
+.capa-hero .capa-top{padding:1.2rem 1.35rem 0;color:var(--ouro-claro)}
+.capa-texto{width:100%;max-width:560px;padding:0 0 3.2rem clamp(2.5rem,7vw,6rem);animation:chIn 1.1s .2s var(--ease) both}
+.capa-nome{font-family:var(--serif);font-weight:600;font-size:clamp(3.6rem,7.4vw,6.8rem);line-height:.95;letter-spacing:-.025em;color:var(--texto)}
+.capa-frase{margin-top:1.1rem;max-width:32ch;font-family:var(--serif);font-weight:500;font-size:1.22rem;line-height:1.55;color:var(--texto)}
+.capa-juntos{margin-top:.8rem;font-family:var(--serif);font-weight:500;font-size:1rem;color:var(--texto-2)}
+.capa-juntos b{font-weight:700;color:var(--sakura);font-variant-numeric:tabular-nums}
+.capa-comecar{
+  display:inline-flex;align-items:center;gap:.7rem;margin-top:1.8rem;min-height:52px;padding:0 1.6rem 0 1.9rem;
+  border:0;border-radius:100px;cursor:pointer;background:var(--vermelhao);color:var(--washi);
+  font-family:var(--serif);font-weight:700;font-size:1.02rem;letter-spacing:.02em;
+  box-shadow:0 12px 30px rgba(195,51,57,.32);transition:transform .35s var(--ease),box-shadow .35s,background .25s;
 }
-/* no celular a foto ganha mais altura pros rostos ficarem livres; a esteira aparece logo abaixo */
+.capa-comecar .ico{width:17px;height:17px;transition:transform .35s var(--ease)}
+.capa-comecar:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(195,51,57,.42)}
+.capa-comecar:hover .ico{transform:translateX(3px)}
+.capa-comecar:active{transform:scale(.97)}
+.capa-texto .novidade{display:flex;width:fit-content;margin-top:1.1rem;padding-left:0;text-align:left;max-width:100%}
+
+/* celular: a foto fica em cima e se dissolve na laca; o texto vem embaixo, em fundo liso */
 @media(max-width:899px){
-  .capa-hero{min-height:max(430px,86svh)}
-  .capa-foto img{object-position:56% 12%}
-  .capa-texto .makie{display:none}
-  .capa-frase{font-size:1rem;max-width:28ch}
-  .capa-acoes2{margin-top:1.2rem}
+  .capa-hero{min-height:94svh}
+  .capa-foto{bottom:auto;height:64%;
+    -webkit-mask-image:linear-gradient(to bottom,#000 62%,transparent 100%);mask-image:linear-gradient(to bottom,#000 62%,transparent 100%)}
+  .capa-foto img{object-position:58% 8%}
+  .capa-hero::before{background:linear-gradient(to bottom,rgba(18,10,11,.55),transparent 14%)}
+  .capa-texto{max-width:none;padding:0 1.5rem 1.6rem}
+  .capa-nome{font-size:clamp(3.2rem,15vw,4.6rem)}
+  .capa-frase{font-size:1.08rem}
+  .capa-comecar{margin-top:1.4rem}
 }
-.capa-texto .novidade{text-align:left}
-@media(max-height:700px){.capa-nome{font-size:clamp(3rem,11vw,5rem)}.capa-texto{padding-bottom:1rem}}
+@media(max-height:700px) and (min-width:900px){.capa-nome{font-size:clamp(3.2rem,6vw,5.2rem)}.capa-texto{padding-bottom:1.8rem}.capa-comecar{margin-top:1.3rem}}
 @media(prefers-reduced-motion:reduce){.capa-foto img{animation:none}}
 
 /* ═══════════════════ A ESTEIRA (índice da capa) ═══════════════════ */
@@ -792,32 +791,11 @@ details.fold[open] summary::after{transform:rotate(45deg)}
       <div class="capa-top"><span>presente que cresce</span><span>desde 12.06.2026</span></div>
 
       <div class="capa-texto">
-        <!-- galho de sakura em maki-e (ouro + rosa). Toca nas flores. -->
-        <svg class="makie" id="makie" viewBox="0 0 260 220" aria-hidden="true">
-          <path d="M252 8 C 210 30 182 46 150 76 C 122 102 96 128 58 150 C 40 160 22 166 6 168" fill="none" stroke="#C9A35E" stroke-width="2.2" stroke-linecap="round"/>
-          <path d="M150 76 C 160 96 164 112 162 132 M 108 112 C 100 92 88 80 70 72 M 196 44 C 206 60 224 70 244 72" fill="none" stroke="#C9A35E" stroke-width="1.4" stroke-linecap="round"/>
-          <!-- pó de ouro do maki-e -->
-          <path fill="#E6CC97" opacity=".75" d="M234.7 22a1.3 1.3 0 1 0 2.6 0a1.3 1.3 0 1 0 -2.6 0M220.1 36a.9 .9 0 1 0 1.8 0a.9 .9 0 1 0 -1.8 0M205.9 27a1.1 1.1 0 1 0 2.2 0a1.1 1.1 0 1 0 -2.2 0M176.6 56a1.4 1.4 0 1 0 2.8 0a1.4 1.4 0 1 0 -2.8 0M162.2 64a.8 .8 0 1 0 1.6 0a.8 .8 0 1 0 -1.6 0M132.8 96a1.2 1.2 0 1 0 2.4 0a1.2 1.2 0 1 0 -2.4 0M118.1 90a.9 .9 0 1 0 1.8 0a.9 .9 0 1 0 -1.8 0M99.7 120a1.3 1.3 0 1 0 2.6 0a1.3 1.3 0 1 0 -2.6 0M85.2 128a.8 .8 0 1 0 1.6 0a.8 .8 0 1 0 -1.6 0M66.9 142a1.1 1.1 0 1 0 2.2 0a1.1 1.1 0 1 0 -2.2 0M45.1 152a.9 .9 0 1 0 1.8 0a.9 .9 0 1 0 -1.8 0M28.8 161a1.2 1.2 0 1 0 2.4 0a1.2 1.2 0 1 0 -2.4 0M169.2 40a.8 .8 0 1 0 1.6 0a.8 .8 0 1 0 -1.6 0M140 112a1 1 0 1 0 2 0a1 1 0 1 0 -2 0M197.1 60a.9 .9 0 1 0 1.8 0a.9 .9 0 1 0 -1.8 0M226.9 48a1.1 1.1 0 1 0 2.2 0a1.1 1.1 0 1 0 -2.2 0"/>
-          <g fill="#F3B4C3" class="flor-toque">
-            <use href="#flor" x="140" y="58" width="34" height="34"/>
-            <use href="#flor" x="148" y="122" width="26" height="26"/>
-            <use href="#flor" x="54" y="58" width="30" height="30"/>
-            <use href="#flor" x="226" y="56" width="28" height="28"/>
-            <use href="#flor" x="92" y="120" width="22" height="22"/>
-          </g>
-          <g fill="#F0876C" class="flor-toque">
-            <use href="#flor" x="186" y="28" width="24" height="24"/>
-            <use href="#flor" x="24" y="146" width="20" height="20"/>
-          </g>
-        </svg>
-        <div class="capa-eyebrow">para você</div>
         <h1 class="capa-nome">Giuliana</h1>
         <!-- EDITAR: a frase da capa -->
-        <p class="capa-frase">"Pra você, princesa, a minha pessoa favorita no mundo inteiro."</p>
-        <div class="capa-acoes2">
-          <button class="btn capa-comecar" type="button" onclick="go(1)" aria-label="começar a nossa história">começar <svg class="ico" aria-hidden="true"><use href="#seta"/></svg></button>
-          <span class="capa-juntos" id="capaJuntos"></span>
-        </div>
+        <p class="capa-frase">“Pra você, princesa, a minha pessoa favorita no mundo inteiro.”</p>
+        <p class="capa-juntos" id="capaJuntos"></p>
+        <button class="capa-comecar" type="button" onclick="go(1)" aria-label="começar a nossa história">começar <svg class="ico" aria-hidden="true"><use href="#seta"/></svg></button>
         <button class="novidade" id="heroNews" type="button">
           <span class="tag-novo">novo</span>
           <span id="heroNewsTxt">a contagem pro Rio começou</span>
@@ -1669,10 +1647,13 @@ let esteiraPausa = 0, esteiraArrastou = false;
     const b = e.target.closest('.belt-plate');
     if(b && !esteiraArrastou) go(+b.dataset.i);
   });
-  let pos = null;
+  let pos = null, volta = 0;
+  // mede a volta só quando precisa (ler offsetLeft a cada quadro força o celular a recalcular a página)
+  const medirVolta = ()=>{ volta = esteira.children[originais.length].offsetLeft - originais[0].offsetLeft; };
+  window.addEventListener('resize', ()=>{ volta = 0; }, {passive:true});
   function passo(){
-    if(!reduzMovimento && current === 0 && Date.now() > esteiraPausa){
-      const volta = esteira.children[originais.length].offsetLeft - originais[0].offsetLeft;
+    if(!reduzMovimento && current === 0 && Date.now() > esteiraPausa && !document.hidden){
+      if(!volta) medirVolta();
       if(pos === null || Math.abs(rail.scrollLeft - pos) > 2) pos = rail.scrollLeft;
       pos += .35;
       if(pos >= volta) pos -= volta;
@@ -1806,7 +1787,7 @@ function renderQuiz(){
 function resultMsg(){
   if(score === quiz.length) return 'Gabaritou! Você presta atenção na gente do mesmo jeito que eu. ❤';
   if(score >= quiz.length-2) return 'Quase perfeita, igual a gente. 😌';
-  return 'Ê princesa… vamos ter que viver tudo isso de novo pra você não esquecer. 😆';
+  return 'Ê princesa, vamos ter que viver tudo isso de novo pra você não esquecer. 😆';
 }
 function restartQuiz(){
   qi = 0; score = 0;
@@ -2117,7 +2098,7 @@ function oguruTick(){
     // na capa, a novidade é o campeonato até ele acontecer
     const d = Math.floor(diff/86400000);
     document.getElementById('heroNewsTxt').innerHTML = d >= 1
-      ? 'faltam <b>'+d+' '+(d===1?'dia':'dias')+'</b> pro Campeonato Oguru'
+      ? 'faltam <b>'+d+' '+(d===1?'dia':'dias')+'</b> pro Oguru'
       : 'hoje tem <b>Campeonato Oguru</b>';
   } else {
     document.getElementById('ogCd').style.display = 'none';
@@ -2321,8 +2302,9 @@ function capaJuntos(){
   if(h.getDate() < ini.getDate()) meses--;
   const dias = Math.floor((h - ini)/86400000);
   const mesversario = h.getDate() === ini.getDate() && meses > 0;
-  document.getElementById('capaJuntos').innerHTML =
-    (mesversario ? 'hoje: ' : '') + '<b>'+meses+'</b> '+(meses===1?'mês':'meses')+' · <b>'+dias+'</b> dias de nós';
+  document.getElementById('capaJuntos').innerHTML = mesversario
+    ? 'Hoje a gente faz <b>'+meses+' '+(meses===1?'mês':'meses')+'</b>. São <b>'+dias+' dias</b> de nós.'
+    : '<b>'+meses+' '+(meses===1?'mês':'meses')+'</b> e <b>'+dias+' dias</b> de nós.';
 }
 capaJuntos();
 tick(); rioTick(); oguruTick();

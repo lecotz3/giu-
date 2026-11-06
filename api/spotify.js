@@ -28,7 +28,9 @@ async function lerCorpo(req) {
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   if (!CLIENT_ID || !CLIENT_SECRET || !REFRESH) {
-    return res.status(503).json({ configured: false, falta: { app: !CLIENT_ID || !CLIENT_SECRET, login: !REFRESH } });
+    // só os nomes (nunca os valores), pra achar variável com nome errado ou fora de Production
+    const vistos = Object.keys(process.env).filter(k => /SPOTIFY/i.test(k));
+    return res.status(503).json({ configured: false, falta: { app: !CLIENT_ID || !CLIENT_SECRET, login: !REFRESH }, vistos, ambiente: process.env.VERCEL_ENV || null });
   }
   try {
     if (req.method === 'GET') {

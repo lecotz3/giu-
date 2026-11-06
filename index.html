@@ -405,6 +405,10 @@ details.fold[open] summary::after{transform:rotate(45deg)}
 .fold-body{padding:0 1.1rem 1.2rem}
 .fold-body p{color:var(--texto-2);margin-bottom:.9rem;max-width:62ch}
 .fold-body p strong{color:var(--texto);font-weight:700}
+.passos{list-style:none;counter-reset:passo;display:grid;gap:.75rem;margin-bottom:1rem}
+.passos li{counter-increment:passo;position:relative;padding-left:2.6rem;min-height:1.9rem;color:var(--texto-2);max-width:62ch}
+.passos li::before{content:counter(passo);position:absolute;left:0;top:0;display:grid;place-items:center;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--salmao);color:var(--laca);font-family:var(--serif);font-weight:700;font-size:.95rem}
+.passos strong{color:var(--texto);font-weight:700}
 .champ-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--fio)}
 .champ{width:100%;border-collapse:collapse;min-width:440px}
 .champ th{text-align:left;padding:.75rem .9rem;font-weight:500;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ouro);background:var(--laca-3);border-bottom:1px solid var(--fio);white-space:nowrap}
@@ -988,6 +992,20 @@ details.fold[open] summary::after{transform:rotate(45deg)}
 
     <h3 class="subhead">O placar ao vivo</h3>
     <p>Abre essa página no celular lá na mesa. Escolhe quem comeu, toca no prato e pronto: o site faz a conta pela tabela. Fica tudo salvo, mesmo se fechar.</p>
+    <details class="fold" open>
+      <summary>Como usar o placar</summary>
+      <div class="fold-body">
+        <ol class="passos">
+          <li><strong>Escolhe quem comeu.</strong> Toca em <strong>Giu</strong> ou <strong>Leo</strong>, logo abaixo do placar. Se a porção foi dividida (um yakisoba 50/50, por exemplo), toca em <strong>dividido</strong>: cada um ganha metade dos pontos.</li>
+          <li><strong>Toca no prato.</strong> Cada toque é uma unidade: uma fatia de sashimi, um nigiri, um temaki inteiro, uma porção de yakisoba. Os pontos já saem da tabela, não precisa fazer conta.</li>
+          <li><strong>Sobrou metade?</strong> Toca em <strong>"½ comeu só metade"</strong> antes do prato. Ele vale metade e o botão desliga sozinho depois.</li>
+          <li><strong>Errou?</strong> O <strong>desfazer</strong>, lá embaixo dos pratos, apaga o último toque.</li>
+          <li><strong>Porção muito grande ou muito pequena?</strong> O juiz usa o <strong>−1 / +1</strong> embaixo de cada placar.</li>
+          <li><strong>Acabou o rodízio?</strong> Toca em <strong>encerrar rodada</strong>: o resultado vai pro hall da fama e o placar zera pra próxima.</li>
+        </ol>
+        <p>Dica: marca tudo num celular só. Cada celular guarda o seu próprio placar, então se cada um marcar no seu, os números não se juntam.</p>
+      </div>
+    </details>
     <div class="placar">
       <div class="jogador" id="jog-giu"><div class="quem">Giu</div><div class="pts" id="pts-giu" aria-live="polite">0</div>
         <div class="lista" id="lista-giu"></div>

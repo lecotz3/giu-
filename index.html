@@ -6,6 +6,12 @@
 <title>Para a Giuliana ❤, de Leo</title>
 <meta name="description" content="Um presente que cresce junto com a gente: nossa história, nossas fotos e as próximas paradas, Rio e Chile.">
 <meta name="theme-color" content="#120A0B">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Giu">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://giu-nu.vercel.app/">
 <meta property="og:title" content="Para a Giuliana ❤, de Leo">
@@ -25,6 +31,7 @@
 <link rel="preload" as="image" href="imgs/A_gente.jpeg" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
@@ -278,6 +285,13 @@ p.lead{font-size:1.02rem;color:var(--texto-2);max-width:60ch;margin-bottom:1.2re
 }
 .cardapio a:hover{padding-left:.6rem;color:var(--salmao)}
 .cardapio a.now{color:var(--salmao)}
+.instalar{margin-top:2rem;padding:1.1rem 1.2rem;border-radius:14px;border:1px solid var(--fio);background:var(--laca-2)}
+.instalar[hidden]{display:none}
+.instalar > b{display:block;font-family:var(--serif);font-weight:600;font-size:1.1rem;color:var(--texto)}
+.instalar p{margin:.35rem 0 .9rem;font-size:.9rem;color:var(--texto-2)}
+.instalar .dica{margin:.9rem 0 0;color:var(--texto)}
+.instalar .dica b{color:var(--salmao)}
+.instalar .dica[hidden]{display:none}
 .cardapio a .dot{width:34px;height:34px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:.72rem;font-weight:700;color:var(--ouro-claro);background:radial-gradient(circle closest-side,var(--laca-3) 0 70%,var(--aro) 70% 100%)}
 .cardapio a .novo{margin-left:auto;font-family:var(--sans);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;background:var(--ouro);color:var(--laca);padding:.18rem .5rem;border-radius:100px}
 .fechar{align-items:center;gap:.4rem;position:fixed;top:max(1rem,env(safe-area-inset-top));right:1rem;z-index:46;min-height:44px;padding:.55rem 1rem;border-radius:100px;border:1px solid var(--fio-forte);background:var(--laca-2);cursor:pointer;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;display:none}
@@ -354,6 +368,8 @@ p.lead{font-size:1.02rem;color:var(--texto-2);max-width:60ch;margin-bottom:1.2re
 .music-card .embed{position:relative;padding-bottom:56.25%;height:0;background:#000}
 .music-card iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .music-meta{padding:1.3rem 1.4rem 1.5rem}
+.spotify-card{margin-top:1rem;border-radius:14px;overflow:hidden;border:1px solid var(--fio);background:var(--laca-2);box-shadow:var(--sombra);min-height:352px}
+.spotify-card iframe{display:block;width:100%;height:352px;border:0}
 .music-meta .song{font-family:var(--serif);font-weight:600;font-size:1.55rem;line-height:1.2}
 .music-meta .artist{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ouro);margin:.3rem 0 .9rem}
 .music-meta .note{font-family:var(--serif);font-size:1.05rem;color:var(--texto);max-width:52ch}
@@ -371,6 +387,10 @@ p.lead{font-size:1.02rem;color:var(--texto-2);max-width:60ch;margin-bottom:1.2re
 }
 .photo:hover{transform:translateY(-3px);border-color:var(--fio-forte)}
 .photo img{width:100%;height:auto;display:block}
+.gallery.tilt .photo{transform-style:preserve-3d;transition:border-color .3s}
+.gallery.tilt .photo:hover{border-color:var(--fio-forte)}
+.mexer-fotos{margin-top:1rem}
+.mexer-fotos[hidden]{display:none}
 .photo figcaption{padding:.55rem .75rem .65rem;font-family:var(--serif);font-weight:500;font-size:.9rem;line-height:1.4}
 .photo .badge{position:absolute;top:.5rem;left:.5rem;z-index:2;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--tinta);background:var(--salmao);padding:.22rem .5rem;border-radius:100px;pointer-events:none}
 .lightbox{
@@ -625,6 +645,12 @@ details.fold[open] summary::after{transform:rotate(45deg)}
 .letter p{font-family:var(--serif);font-weight:500;font-size:1.06rem;line-height:1.95;margin-bottom:1.05rem;max-width:58ch}
 .letter .assina{display:flex;align-items:center;gap:1rem;margin-top:1.6rem}
 .letter .assina span{font-family:var(--serif);font-weight:700;font-size:1.2rem}
+/* enquanto a cartinha se prepara pra se escrever sozinha */
+.letter.preparando > *{visibility:hidden}
+.letter .char{display:inline-block;will-change:opacity,transform}
+.pular-carta{display:flex;justify-content:flex-end;margin-top:1rem}
+.pular-carta + .letter{margin-top:.7rem}
+.pular-carta[hidden]{display:none}
 .hanko{width:54px;height:54px;flex:none;transform:rotate(-6deg)}
 
 /* ═══════════════════ XIII · A SURPRESA ═══════════════════ */
@@ -688,6 +714,11 @@ details.fold[open] summary::after{transform:rotate(45deg)}
 .jogador .ajuste button:hover{border-color:var(--ouro);color:var(--ouro-claro)}
 .placar-acoes{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1rem}
 .placar-nota{margin-top:.7rem;font-size:.86rem;color:var(--texto-2)}
+.sync-status{display:flex;align-items:center;gap:.5rem;margin-top:.5rem;font-size:.8rem;color:var(--texto-2)}
+.sync-status::before{content:'';width:8px;height:8px;border-radius:50%;flex:none;background:var(--fio-forte)}
+.sync-status[data-st="on"]::before{background:#7BC59A;box-shadow:0 0 0 3px rgba(123,197,154,.18)}
+.sync-status[data-st="off"]::before{background:var(--ouro)}
+.sync-status[data-st="sem-net"]::before{background:var(--salmao)}
 .hall{margin-top:1rem;display:grid;gap:.5rem}
 .hall-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:.3rem 1rem;padding:.75rem 1rem;border-radius:12px;border:1px solid var(--fio);background:var(--laca-2)}
 .hall-row .dt{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ouro);min-width:6.5rem}
@@ -876,6 +907,17 @@ details.fold[open] summary::after{transform:rotate(45deg)}
         </figure>
       </div>
     </div>
+
+    <!-- EDITAR: a playlist do Spotify (troca o id depois de /playlist/).
+         Está escondida porque a playlist ficou privada no Spotify: deixa ela pública e apaga o "hidden" da linha de baixo
+         (e troca o data-band do capítulo pra "duas faixas e uma playlist"). -->
+    <div id="playlist" hidden>
+    <h3 class="subhead">A nossa playlist</h3>
+    <p>A que eu te mandei em junho. Dá play quando bater saudade.</p>
+    <div class="spotify-card">
+      <iframe src="https://open.spotify.com/embed/playlist/7vNHWDAHDk8kgsJvIHQhhH?utm_source=generator&amp;theme=0" title="Playlist I think I miss my wife, no Spotify" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    </div>
+    </div>
   </section>
 
   <!-- ══════════════ III · O MURAL ══════════════ -->
@@ -884,6 +926,7 @@ details.fold[open] summary::after{transform:rotate(45deg)}
   <section id="fotos" class="chapter" data-title="O mural" data-part="1" data-band="{fotos} fotos">
     <h2 class="title">Nosso <em>mural</em> de memórias</h2>
     <p class="lead">Cada foto aqui é um pedacinho de nós. As que têm o selinho "nova" acabaram de chegar: os nossos dias comuns, que pra mim não têm nada de comum.</p>
+    <button class="btn ghost small mexer-fotos" type="button" id="mexerFotos" hidden>mexer as fotos com o celular</button>
     <div class="gallery">
       <figure class="photo" data-new><img src="imgs/jantar.jpeg" alt="Giuliana sorrindo numa mesa debaixo de um teto de vidro" width="1050" height="1400" loading="lazy"><figcaption>O dia do Noel Gallagher</figcaption></figure>
       <figure class="photo" data-new><img src="imgs/cafe.jpeg" alt="Giuliana adoçando o café num café da manhã a dois" width="1050" height="1400" loading="lazy"><figcaption>Café da manhã a dois</figcaption></figure>
@@ -1056,6 +1099,7 @@ details.fold[open] summary::after{transform:rotate(45deg)}
       <button class="btn small" type="button" id="encerrarRodada">encerrar rodada</button>
       <button class="btn ghost small" type="button" id="zerarPlacar">zerar placar</button>
     </div>
+    <p class="sync-status" id="syncStatus" data-st="?">conectando o placar…</p>
     <p class="placar-nota" id="placarNota" aria-live="polite">"Encerrar rodada" guarda o resultado no hall da fama aqui embaixo.</p>
 
     <h3 class="subhead">Hall da fama</h3>
@@ -1350,6 +1394,7 @@ details.fold[open] summary::after{transform:rotate(45deg)}
   <!-- EDITAR: o texto da carta -->
   <section id="cartinha" class="chapter" data-title="Uma cartinha" data-part="4" data-band="escrita de coração">
     <h2 class="title">Uma <em>cartinha</em> pra você</h2>
+    <div class="pular-carta" id="pularCarta" hidden><button class="btn ghost small" type="button">mostrar tudo</button></div>
     <div class="letter">
       <div class="to">Minha linda,</div>
       <p>Eu não sou muito de achar as palavras certas na hora, então resolvi escrever. Assim eu consigo te dizer com calma o que às vezes trava na minha garganta.</p>
@@ -1570,6 +1615,7 @@ function go(i){
   chapters[i].classList.add('active');
   current = i;
   window.scrollTo({top:0,behavior:'instant'});
+  if(typeof aoAbrir === 'function') aoAbrir(chapters[i].id);
   // o reflexo do verniz atravessa a tela
   const v = document.getElementById('verniz');
   v.classList.remove('go'); void v.offsetWidth; if(!reduzMovimento) v.classList.add('go');
@@ -1765,6 +1811,7 @@ function renderQuiz(){
       '<p>'+resultMsg()+'</p>'+
       '<button class="btn ghost" type="button" onclick="restartQuiz()">jogar de novo</button></div>';
     if(score === quiz.length) burstAt(card, 22);
+    if(score >= quiz.length-2) festa(score === quiz.length ? 'grande' : 'media', ['🌸','❤️']);
     return;
   }
   const item = quiz[qi];
@@ -2118,7 +2165,10 @@ const pratosOguru = [
 ];
 const nomeJog = {giu:'Giu', leo:'Leo'};
 // cada toque vira um lançamento; o placar é a soma deles (assim dá pra desfazer)
+// id: identifica o lançamento · g: o toque inteiro (no "dividido" as duas metades têm o mesmo g)
+const novoId = () => (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : Date.now().toString(36)+Math.random().toString(36).slice(2,10);
 let rodada = lerSalvo('giu-oguru-rodada', []);
+rodada.forEach((l,k)=>{ if(!l.id) l.id = novoId(); if(!l.g) l.g = (l.par && rodada[k-1]) ? rodada[k-1].g : l.id; delete l.par; });
 let quem = 'giu', soMetade = false;
 const fmt = n => String(Math.round(n*10)/10).replace('.', ',');
 function totais(){
@@ -2151,7 +2201,13 @@ function renderPlacar(){
     : 'Nenhum prato marcado ainda.';
   document.getElementById('desfazer').disabled = !rodada.length;
 }
-function lancar(l){ rodada.push(l); salvar('giu-oguru-rodada', rodada); renderPlacar(); if(navigator.vibrate) navigator.vibrate(12); }
+function lancar(...ls){
+  const g = novoId();
+  ls.forEach(l=>{ l.id = novoId(); l.g = g; rodada.push(l); });
+  salvar('giu-oguru-rodada', rodada); renderPlacar();
+  if(navigator.vibrate) navigator.vibrate(12);
+  enfileirar({op:'add', itens:ls});
+}
 
 (function montarPratos(){
   const box = document.getElementById('pratos');
@@ -2174,8 +2230,8 @@ function lancar(l){ rodada.push(l); salvar('giu-oguru-rodada', rodada); renderPl
     if(quem === 'ambos'){
       // porção dividida: metade dos pontos pra cada um (regra 3)
       const grupo = 'dividido · '+fmt(base*frac/2)+' pra cada';
-      rodada.push({p:'giu', item, pts:base*frac/2, frac:frac/2, grupo});
-      lancar({p:'leo', item, pts:base*frac/2, frac:frac/2, grupo, par:true});
+      lancar({p:'giu', item, pts:base*frac/2, frac:frac/2, grupo},
+             {p:'leo', item, pts:base*frac/2, frac:frac/2, grupo});
     } else {
       lancar({p:quem, item, pts:base*frac, frac});
     }
@@ -2202,9 +2258,10 @@ document.querySelectorAll('.ajuste button').forEach(b=>{
   };
 });
 document.getElementById('desfazer').onclick = ()=>{
-  const u = rodada.pop();
-  if(u && u.par) rodada.pop(); // dividido: desfaz as duas metades juntas
+  const u = rodada[rodada.length-1]; if(!u) return;
+  rodada = rodada.filter(l=>l.g !== u.g); // dividido: desfaz as duas metades juntas
   salvar('giu-oguru-rodada', rodada); renderPlacar();
+  enfileirar({op:'undo', g:u.g});
 };
 
 // EDITAR: rodadas antigas; as novas entram pelo botão "encerrar rodada"
@@ -2232,6 +2289,7 @@ document.getElementById('zerarPlacar').onclick = ()=>{
   }
   zerarArmado = false; clearTimeout(zerarTimer);
   rodada = []; salvar('giu-oguru-rodada', rodada); renderPlacar();
+  enfileirar({op:'reset'});
   placarNota.textContent = 'Placar zerado. Bora de novo!';
 };
 document.getElementById('encerrarRodada').onclick = ()=>{
@@ -2239,8 +2297,12 @@ document.getElementById('encerrarRodada').onclick = ()=>{
   const h = new Date();
   const dt = String(h.getDate()).padStart(2,'0')+'.'+String(h.getMonth()+1).padStart(2,'0')+'.'+h.getFullYear();
   const rodadas = lerSalvo('giu-oguru-hall', []);
-  rodadas.push({dt, giu:placar.giu, leo:placar.leo});
+  const resultado = {id:novoId(), dt, giu:placar.giu, leo:placar.leo};
+  rodadas.push(resultado);
   salvar('giu-oguru-hall', rodadas);
+  enfileirar({op:'encerrar', resultado});
+  // a campeã ganha chuva de sushi; o resto ganha uma garoa
+  festa(placar.giu > placar.leo ? 'grande' : placar.giu === placar.leo ? 'media' : 'pequena', ['🍣','🌸','❤️']);
   placarNota.textContent = placar.giu > placar.leo ? 'Campeã! Eu falei que era você.'
                          : placar.leo > placar.giu ? 'Dessa vez foi minha. Revanche marcada?'
                          : 'Empate! O amor venceu.';
@@ -2293,6 +2355,190 @@ function contarRest(){
   document.getElementById('restCount').textContent = fomos.filter(n=>todos.includes(n)).length;
 }
 contarRest();
+
+/* ═══════════════════ PLACAR SINCRONIZADO (os dois celulares) ═══════════════════ */
+// Cada mudança vai pra uma fila que sobe pro /api/placar. Se a internet cair, a fila espera.
+// Se o banco não estiver ligado na Vercel, a API responde 503 e o placar fica só no celular.
+let syncLigado = null; // null = ainda não sei · true · false
+let fila = lerSalvo('giu-oguru-fila', []);
+let enviando = false;
+const syncEl = document.getElementById('syncStatus');
+function statusSync(st){
+  syncEl.dataset.st = st;
+  syncEl.textContent = {
+    'on': 'Sincronizado: o que um celular marca, aparece no outro.',
+    'off': 'Placar guardado só neste celular.',
+    'sem-net': 'Sem internet agora. Os toques ficam guardados e sobem quando voltar.'
+  }[st] || 'conectando o placar…';
+}
+async function apiPlacar(corpo){
+  const r = await fetch('/api/placar', corpo
+    ? {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(corpo)}
+    : {cache:'no-store'});
+  if(r.status === 503 || r.status === 404){ const e = new Error('desligado'); e.desligado = true; throw e; }
+  if(!r.ok) throw new Error('http '+r.status);
+  return r.json();
+}
+function aplicarEstado(s){
+  if(!s || !Array.isArray(s.rodada)) return;
+  rodada = s.rodada; salvar('giu-oguru-rodada', rodada);
+  salvar('giu-oguru-hall', s.hall || []);
+  renderPlacar(); renderHall();
+}
+function falhaSync(e){
+  if(e && e.desligado){ syncLigado = false; fila = []; salvar('giu-oguru-fila', fila); statusSync('off'); }
+  else statusSync('sem-net');
+}
+function enfileirar(op){
+  if(syncLigado === false) return;
+  fila.push(op); salvar('giu-oguru-fila', fila);
+  enviarFila();
+}
+async function enviarFila(){
+  if(enviando || !fila.length) return;
+  enviando = true;
+  try{
+    while(fila.length){
+      const s = await apiPlacar(fila[0]);
+      fila.shift(); salvar('giu-oguru-fila', fila);
+      syncLigado = true;
+      if(!fila.length) aplicarEstado(s);
+    }
+    statusSync('on');
+  }catch(e){ falhaSync(e); }
+  finally{ enviando = false; }
+}
+async function puxarPlacar(){
+  if(syncLigado === false) return;
+  if(fila.length) return enviarFila();
+  try{
+    const s = await apiPlacar();
+    syncLigado = true; statusSync('on');
+    if(!fila.length && !enviando) aplicarEstado(s);
+  }catch(e){ falhaSync(e); }
+}
+// só pergunta pro servidor com o capítulo do Oguru aberto e a tela ligada
+setInterval(()=>{ if(chapters[current].id === 'campeonato' && !document.hidden) puxarPlacar(); }, 3000);
+document.addEventListener('visibilitychange', ()=>{ if(!document.hidden && chapters[current].id === 'campeonato') puxarPlacar(); });
+window.addEventListener('online', ()=>{ if(chapters[current].id === 'campeonato') puxarPlacar(); });
+
+/* ═══════════════════ BIBLIOTECAS SOB DEMANDA ═══════════════════ */
+// só baixa quando o capítulo que usa abre, pra capa continuar leve no celular
+const scriptsCarregados = {};
+function loadScript(src){
+  if(!scriptsCarregados[src]) scriptsCarregados[src] = new Promise((ok, erro)=>{
+    const s = document.createElement('script');
+    s.src = src; s.async = true; s.crossOrigin = 'anonymous';
+    s.onload = ok; s.onerror = ()=>{ delete scriptsCarregados[src]; erro(new Error(src)); };
+    document.head.appendChild(s);
+  });
+  return scriptsCarregados[src];
+}
+const CDN = {
+  gsap: 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js',
+  split: 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js',
+  tilt: 'https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js',
+  confete: 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js'
+};
+
+/* ── confete de sushi e pétala ── */
+async function festa(tamanho, emojis){
+  if(reduzMovimento) return;
+  try{ await loadScript(CDN.confete); }catch(e){ return; }
+  const n = {grande:1, media:.55, pequena:.25}[tamanho] || .5;
+  const scalar = 2.4;
+  const shapes = emojis.map(t=>confetti.shapeFromText({text:t, scalar}));
+  const cores = ['#F0876C','#F3B4C3','#C9A35E','#C33339','#F3ECE2'];
+  const emoji = {shapes, scalar, particleCount:Math.round(40*n), spread:70, startVelocity:42, ticks:260, gravity:.85, flat:false, zIndex:200};
+  confetti(Object.assign({}, emoji, {angle:60, origin:{x:0, y:.75}}));
+  confetti(Object.assign({}, emoji, {angle:120, origin:{x:1, y:.75}}));
+  confetti({particleCount:Math.round(90*n), spread:100, startVelocity:36, origin:{y:.6}, colors:cores, ticks:220, zIndex:200});
+  if(tamanho === 'grande') setTimeout(()=>confetti(Object.assign({}, emoji, {particleCount:30, spread:120, origin:{x:.5, y:.35}})), 450);
+}
+
+/* ── a cartinha se escrevendo sozinha ── */
+let cartaEscrita = false;
+async function escreverCarta(){
+  if(cartaEscrita) return; cartaEscrita = true;
+  const carta = document.querySelector('#cartinha .letter');
+  if(reduzMovimento) return;
+  carta.classList.add('preparando');
+  const desiste = setTimeout(()=>carta.classList.remove('preparando'), 5000); // CDN lenta: mostra a carta normal
+  try{ await loadScript(CDN.gsap); await loadScript(CDN.split); }
+  catch(e){ clearTimeout(desiste); carta.classList.remove('preparando'); return; }
+  clearTimeout(desiste);
+  if(!carta.classList.contains('preparando')) return;
+  gsap.registerPlugin(SplitText);
+  const textos = carta.querySelectorAll('.to, p');
+  const split = new SplitText(textos, {type:'words,chars', charsClass:'char'});
+  const assina = carta.querySelector('.assina');
+  const pular = document.getElementById('pularCarta');
+  const hanko = assina.querySelector('.hanko');
+  const tl = gsap.timeline({onComplete:()=>{
+    split.revert(); pular.hidden = true;
+    gsap.set([assina, hanko], {clearProps:'all'}); // volta pro CSS original (o selo torto de -6°)
+  }});
+  tl.add(()=>carta.classList.remove('preparando'))
+    .from(split.chars, {opacity:0, y:3, duration:.22, ease:'power1.out', stagger:.014})
+    .from(assina, {opacity:0, duration:.4})
+    .from(hanko, {scale:1.6, rotate:-14, opacity:0, duration:.45, ease:'back.out(2.2)'}, '<');
+  pular.hidden = false;
+  pular.querySelector('button').onclick = ()=>tl.progress(1);
+}
+
+/* ── fotos do mural que inclinam com o celular ── */
+let tiltLigado = false;
+async function ligarTilt(){
+  if(tiltLigado || reduzMovimento) return; tiltLigado = true;
+  try{ await loadScript(CDN.tilt); }catch(e){ tiltLigado = false; return; }
+  document.querySelector('#fotos .gallery').classList.add('tilt');
+  VanillaTilt.init(photos, {max:8, speed:600, perspective:900, glare:true, 'max-glare':.18, gyroscope:true, gyroscopeMinAngleX:-25, gyroscopeMaxAngleX:25, gyroscopeMinAngleY:-25, gyroscopeMaxAngleY:25});
+  // iPhone só libera o giroscópio depois de um toque pedindo permissão
+  if(window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission === 'function' && !lerSalvo('giu-giroscopio', false)){
+    const b = document.getElementById('mexerFotos');
+    b.hidden = false;
+    b.onclick = ()=>DeviceOrientationEvent.requestPermission()
+      .then(r=>{ if(r === 'granted'){ salvar('giu-giroscopio', true); } b.hidden = true; })
+      .catch(()=>{ b.hidden = true; });
+  }
+}
+
+function aoAbrir(id){
+  if(id === 'cartinha') escreverCarta();
+  if(id === 'fotos') ligarTilt();
+  if(id === 'campeonato'){ puxarPlacar(); if(!reduzMovimento) loadScript(CDN.confete).catch(()=>{}); }
+  if(id === 'quiz' && !reduzMovimento) loadScript(CDN.confete).catch(()=>{});
+}
+
+/* ═══════════════════ APP NO CELULAR (PWA) ═══════════════════ */
+if('serviceWorker' in navigator && location.protocol !== 'file:'){
+  window.addEventListener('load', ()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+}
+(function instalarApp(){
+  const jaEhApp = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone;
+  if(jaEhApp) return;
+  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const box = document.createElement('div');
+  box.className = 'instalar'; box.hidden = true;
+  box.innerHTML = '<b>Leva o site pro celular</b>'+
+    '<p>Fica com um ícone na tela inicial, abre como app e funciona até sem internet.</p>'+
+    '<button class="btn small" type="button">colocar na tela inicial</button>'+
+    '<p class="dica" hidden>No iPhone, toca no botão <b>Compartilhar</b> do Safari e depois em <b>Adicionar à Tela de Início</b>.</p>';
+  index.appendChild(box);
+  const dica = box.querySelector('.dica');
+  let pedido = null;
+  box.querySelector('button').onclick = async ()=>{
+    if(pedido){
+      pedido.prompt();
+      const r = await pedido.userChoice.catch(()=>null);
+      pedido = null;
+      if(r && r.outcome === 'accepted') box.hidden = true;
+    } else dica.hidden = !dica.hidden;
+  };
+  window.addEventListener('beforeinstallprompt', e=>{ e.preventDefault(); pedido = e; box.hidden = false; });
+  window.addEventListener('appinstalled', ()=>{ box.hidden = true; });
+  if(ios) box.hidden = false;
+})();
 
 /* inicializa */
 updateChrome();

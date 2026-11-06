@@ -9,7 +9,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://giu-nu.vercel.app/">
 <meta property="og:title" content="Para a Giuliana ❤, de Leo">
-<meta property="og:description" content="Capítulos novos: a contagem regressiva pro Rio e o nosso Chile.">
+<meta property="og:description" content="Capítulos novos: o Campeonato Oguru com placar ao vivo, os nossos restaurantes e a gente em números.">
 <meta property="og:image" content="https://giu-nu.vercel.app/imgs/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -594,6 +594,57 @@ details.fold[open] summary::after{transform:rotate(45deg)}
   100%{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(var(--s,1)) rotate(var(--r))}
 }
 
+/* ═══════════════════ OGURU: contagem, placar e hall da fama ═══════════════════ */
+.og-cd{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-top:1.1rem;max-width:460px}
+.og-cd div{padding:.8rem .3rem .7rem;border-radius:12px;text-align:center;border:1px solid var(--fio);background:var(--laca-2)}
+.og-cd b{display:block;font-family:var(--serif);font-weight:700;font-size:1.9rem;line-height:1.1;color:var(--salmao);font-variant-numeric:tabular-nums}
+.og-cd span{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--texto-2)}
+.og-cd-msg{margin-top:.8rem;font-family:var(--serif);font-weight:500;color:var(--texto)}
+.placar{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:1.1rem}
+.jogador{position:relative;padding:1.2rem .8rem 1rem;border-radius:14px;text-align:center;border:1px solid var(--fio);background:var(--laca-2);transition:border-color .3s,box-shadow .3s}
+.jogador.na-frente{border-color:var(--salmao);box-shadow:0 0 0 1px var(--salmao),var(--sombra)}
+.jogador.na-frente::before{content:'líder';position:absolute;top:-.7rem;left:50%;transform:translateX(-50%);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;background:var(--salmao);color:var(--laca);padding:.12rem .55rem;border-radius:100px}
+.jogador .quem{font-family:var(--serif);font-weight:700;font-size:1.2rem;color:var(--texto)}
+.jogador .pts{font-family:var(--serif);font-weight:700;font-size:3rem;line-height:1.1;color:var(--salmao);font-variant-numeric:tabular-nums}
+.jogador .soma{display:grid;grid-template-columns:repeat(4,1fr);gap:.35rem;margin-top:.7rem}
+.jogador .soma button{min-height:44px;border-radius:10px;border:1px solid var(--fio);background:var(--laca-3);color:var(--texto);font-family:var(--sans);font-weight:500;font-size:.95rem;cursor:pointer;transition:border-color .2s,transform .15s}
+.jogador .soma button:hover{border-color:var(--salmao)}
+.jogador .soma button:active{transform:scale(.94)}
+.jogador .soma button.menos{color:var(--texto-2)}
+.placar-acoes{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1rem}
+.placar-nota{margin-top:.7rem;font-size:.86rem;color:var(--texto-2)}
+.hall{margin-top:1rem;display:grid;gap:.5rem}
+.hall-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:.3rem 1rem;padding:.75rem 1rem;border-radius:12px;border:1px solid var(--fio);background:var(--laca-2)}
+.hall-row .dt{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ouro);min-width:6.5rem}
+.hall-row .res{font-family:var(--serif);font-weight:500;color:var(--texto)}
+.hall-row .res b{color:var(--salmao)}
+.hall-row.pendente{border-style:dashed}
+
+/* ═══════════════════ A GENTE EM NÚMEROS ═══════════════════ */
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:.7rem;margin-top:1.4rem}
+.stat{padding:1.1rem 1rem;border-radius:14px;border:1px solid var(--fio);background:var(--laca-2)}
+.stat.larga{grid-column:1/-1}
+.stat .n{font-family:var(--serif);font-weight:700;font-size:2.1rem;line-height:1.05;color:var(--salmao);font-variant-numeric:tabular-nums}
+.stat .l{margin-top:.35rem;color:var(--texto)}
+.stat .s{margin-top:.3rem;font-size:.86rem;color:var(--texto-2)}
+.split{display:flex;height:8px;border-radius:8px;overflow:hidden;margin-top:.8rem;background:var(--laca)}
+.split .a{background:var(--salmao)}
+.split .b{background:var(--ouro)}
+.split-leg{display:flex;justify-content:space-between;margin-top:.45rem;font-size:.82rem;color:var(--texto-2)}
+
+/* ═══════════════════ RESTAURANTES GIU&LEO ═══════════════════ */
+.rest-group{margin-top:1.4rem}
+.rest-group h3{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;font-weight:700;color:var(--ouro);margin-bottom:.6rem}
+.rest-list{display:flex;flex-wrap:wrap;gap:.5rem}
+.rest{display:inline-flex;align-items:center;gap:.5rem;min-height:44px;padding:.5rem 1rem;border-radius:100px;border:1px solid var(--fio);background:var(--laca-2);color:var(--texto);font-family:var(--sans);font-size:.95rem;cursor:pointer;transition:border-color .25s,background .25s}
+.rest:hover{border-color:var(--fio-forte)}
+.rest .hb{width:18px;height:18px;color:var(--texto-2)}
+.rest .hb path{fill:transparent;transition:fill .3s}
+.rest[aria-pressed="true"]{border-color:var(--salmao);background:var(--laca-3)}
+.rest[aria-pressed="true"] .hb{color:var(--salmao)}
+.rest[aria-pressed="true"] .hb path{fill:var(--salmao)}
+.rest small{font-size:.78rem;color:var(--texto-2)}
+
 /* ═══════════════════ RESPONSIVO ═══════════════════ */
 @media(max-width:380px){
   .chapter{padding-left:1.1rem;padding-right:1.1rem}
@@ -732,6 +783,11 @@ details.fold[open] summary::after{transform:rotate(45deg)}
         <p>Foi quando eu te dei este site. E prometi que ele ia crescer junto com a gente, capítulo por capítulo.</p>
       </div>
       <div class="tl-item">
+        <h3>Seis meses de nós</h3>
+        <div class="tl-date">06 de setembro de 2026</div>
+        <p>Meio ano. Parece pouco no calendário e parece uma vida inteira quando eu lembro de tudo que a gente já viveu junto.</p>
+      </div>
+      <div class="tl-item">
         <h3>As próximas paradas</h3>
         <div class="tl-date">Outubro de 2026</div>
         <p>Compramos o Rio pra virar o ano juntos, e o Chile já tem mês marcado. A história continua, agora com passagem.</p>
@@ -798,6 +854,7 @@ details.fold[open] summary::after{transform:rotate(45deg)}
       <div class="mi"><h3>Quatro dias de sol e de nós</h3><span class="q">primeira viagem · Juquehy</span><p>Sol, mar, academia, comida demais e caminhadas sem hora pra acabar. Mas o que eu mais guardo é a gente deitado conversando sobre o <em>nosso</em> futuro.</p></div>
       <div class="mi"><h3>Friozinho, fondue e a gente</h3><span class="q">Campos do Jordão</span><p>Descemos da praia direto pro frio e continuamos: doces, chocolate, fondue e treino no meio disso tudo. Dias inteiros de só nós dois, e eu não queria mais nada.</p></div>
       <div class="mi"><h3>If I Had a Gun...</h3><span class="q">debaixo do teto de vidro</span><p>Numa mesa com o céu aparecendo pelo vidro, eu te declarei a música do Noel Gallagher. Desde aquele dia ela também é nossa.</p></div>
+      <div class="mi"><h3>Noturno, 34º</h3><span class="q">05.10.2026 · Tênis Clube Paulista</span><p>Você no palco, eu na plateia. Um espetáculo inteiro de música, dança e teatro, e eu passei o tempo todo procurando você em cada cena. A minha atriz favorita.</p></div>
     </div>
 
     <h3 class="subhead">O mapa de nós</h3>
@@ -812,13 +869,38 @@ details.fold[open] summary::after{transform:rotate(45deg)}
     </div>
   </section>
 
+  <!-- ══════════════ A GENTE EM NÚMEROS ══════════════ -->
+  <!-- números tirados da nossa conversa no WhatsApp (de 05/06 a 06/11/2026) -->
+  <section id="numeros" class="chapter" data-title="A gente em números" data-part="1" data-band="junho → novembro" data-new>
+    <h2 class="title">A gente <em>em números</em></h2>
+    <p class="lead">Eu fui lá na nossa conversa do WhatsApp e contei. Desde 5 de junho, que é até onde o celular lembra, isso aqui é o que a gente escreveu um pro outro.</p>
+    <div class="stats">
+      <div class="stat larga">
+        <div class="n">74.936</div>
+        <div class="l">mensagens trocadas em cinco meses</div>
+        <div class="split"><i class="a" style="width:57.2%"></i><i class="b" style="width:42.8%"></i></div>
+        <div class="split-leg"><span>Leo · 42.900</span><span>Giu · 32.036</span></div>
+        <div class="s">Sim, eu falo mais. Não, eu não vou parar.</div>
+      </div>
+      <div class="stat"><div class="n">2.940</div><div class="l">vezes "te amo"</div><div class="s">1.520 meus, 1.420 seus. Empate técnico de amor.</div></div>
+      <div class="stat"><div class="n">695</div><div class="l">"eu te amo mutio"</div><div class="s">Todos meus. Idioma oficial do casal.</div></div>
+      <div class="stat"><div class="n">5.670</div><div class="l">vezes que eu te chamei de "linda"</div><div class="s">E ainda acho pouco.</div></div>
+      <div class="stat"><div class="n">2.281</div><div class="l">vezes que você me chamou de "lindo"</div><div class="s">Mais 1.787 "amor". Eu li cada um.</div></div>
+      <div class="stat"><div class="n">2.276</div><div class="l">fotos mandadas</div><div class="s">Fora as 1.426 figurinhas.</div></div>
+      <div class="stat"><div class="n">367</div><div class="l">"saudade"</div><div class="s">Mesmo morando na mesma cidade.</div></div>
+      <div class="stat"><div class="n">416</div><div class="l">"cheguei"</div><div class="s">A palavra mais tranquilizadora do mundo.</div></div>
+      <div class="stat"><div class="n">13h</div><div class="l">o nosso horário de pico</div><div class="s">Hora do almoço: a gente conversa mais do que come.</div></div>
+    </div>
+    <p class="fecho">Nenhum número desses dá conta. Mas foi divertido contar.</p>
+  </section>
+
   <!-- ══════════════ V · 120 MOTIVOS ══════════════ -->
   <!-- EDITAR: a lista está no JavaScript, procure por "const motivos" -->
-  <section id="motivos" class="chapter" data-title="120 motivos" data-part="2" data-band="cento e vinte cartas">
-    <h2 class="title">120 motivos <em>que eu te amo</em></h2>
-    <p class="lead">Toca em cada cartinha pra descobrir. Eram cem, viraram cento e vinte, e ainda assim faltam.</p>
+  <section id="motivos" class="chapter" data-title="125 motivos" data-part="2" data-band="cento e vinte e cinco cartas">
+    <h2 class="title">125 motivos <em>que eu te amo</em></h2>
+    <p class="lead">Toca em cada cartinha pra descobrir. Eram cem, viraram cento e vinte e cinco, e ainda assim faltam.</p>
     <div class="reasons-meter" aria-live="polite">
-      <span><b id="rCount">0</b> de <b id="rTotal">120</b> descobertos</span>
+      <span><b id="rCount">0</b> de <b id="rTotal">125</b> descobertos</span>
       <span class="bar"><i id="rBar"></i></span>
     </div>
     <div class="reasons-grid" id="reasons"></div>
@@ -832,7 +914,7 @@ details.fold[open] summary::after{transform:rotate(45deg)}
     <h3 class="subhead">Os nomes que só eu te chamo</h3>
     <p>Cada um deles é um jeito diferente de dizer a mesma coisa: que você é minha.</p>
     <div class="apelidos">
-      <span>linda</span><span>princesa</span><span>amor</span><span>giu</span><span>principessa</span><span>love</span>
+      <span>linda</span><span>princesa</span><span>amor</span><span>giu</span><span>principessa</span><span>love</span><span>lindinha</span><span>princesinha</span>
     </div>
 
     <h3 class="subhead">As coisas que fazem você, você</h3>
@@ -844,23 +926,53 @@ details.fold[open] summary::after{transform:rotate(45deg)}
       <span class="tag">How I Met Your Mother</span>
       <span class="tag">Friends</span>
       <span class="tag">café no Central Perk (um dia)</span>
+      <span class="tag">teatro (e o Noturno)</span>
+      <span class="tag">a Wendy</span>
+      <span class="tag">os nossos cafés da manhã</span>
     </div>
     <div class="body-txt" style="margin-top:1.8rem">
       <p>E se você me perguntar as coisas que <em>eu</em> amo em você, eu começo pelo jeito que você cuida de mim: o carinho, a atenção e o cuidado nos detalhes que ninguém mais teria comigo. Junta isso com a sua disciplina e, sim, com o seu shape, e mesmo assim a lista não acaba nunca.</p>
       <p>E já que a gente fala em Friends: eu não preciso de sete temporadas pra entender o que o Ross demorou pra ver. <em>You're my lobster.</em> 🦞 Aqui não tem "we were on a break", não tem pausa, não tem plano B. Tem eu e você no mesmo sofá, pela vida inteira.</p>
+      <p>E no palco? Eu vi o Noturno, 34º, e entendi por que ele está em cartaz há tanto tempo: tem você nele. Você uma vez me escreveu que os meus dias de luta são os seus. Pois os seus palcos também são meus, e eu vou estar na plateia em todos.</p>
     </div>
   </section>
 
   <!-- ══════════════ VII · CAMPEONATO OGURU ══════════════ -->
   <!-- EDITAR: a tabela de pontos está dentro de "A tabela completa do Executivo" -->
-  <section id="campeonato" class="chapter" data-title="Campeonato Oguru" data-part="2" data-band="11.08.2026 · Oguru Itaim">
+  <section id="campeonato" class="chapter" data-title="Campeonato Oguru" data-part="2" data-band="10.11.2026 · Oguru Itaim" data-new>
     <h2 class="title">Campeonato <em>Oguru</em></h2>
-    <p class="lead">A mesa está marcada e agora é oficial: o nosso rodízio tem regra, tabela de pontos e um troféu invisível, mas muito disputado. Quem come mais, leva.</p>
+    <p class="lead">A mesa está marcada pra 10 de novembro e agora é oficial: o nosso rodízio tem regra, tabela de pontos e um troféu invisível, mas muito disputado. Quem come mais, leva.</p>
 
     <figure class="reserva-card">
-      <img src="imgs/reserva.jpeg" alt="Reserva no Oguru Sushi &amp; Bar Itaim, 11/08/2026 às 12:00, 2 pessoas" loading="lazy">
-      <figcaption>Oguru Itaim · 11.08.2026 · meio-dia · mesa pra dois. Trate de chegar com fome, princesa. 😏</figcaption>
+      <img src="imgs/reserva.jpeg" alt="Reserva no Oguru Sushi &amp; Bar Itaim, 10/11/2026 às 12:00, 2 pessoas" loading="lazy">
+      <figcaption>Oguru Itaim · 10.11.2026 · meio-dia · mesa pra dois. Trate de chegar com fome, princesa. 😏</figcaption>
     </figure>
+
+    <h3 class="subhead">Quanto falta pro apito inicial</h3>
+    <div class="og-cd" id="ogCd" role="timer" aria-label="Tempo até o Campeonato Oguru">
+      <div><b id="og-d">0</b><span>dias</span></div>
+      <div><b id="og-h">0</b><span>horas</span></div>
+      <div><b id="og-m">0</b><span>min</span></div>
+      <div><b id="og-s">0</b><span>seg</span></div>
+    </div>
+    <p class="og-cd-msg" id="ogCdMsg">Aquece o estômago, princesa.</p>
+
+    <h3 class="subhead">O placar ao vivo</h3>
+    <p>Abre essa página no celular lá na mesa e vai marcando. Ele fica salvo, mesmo se fechar o site.</p>
+    <div class="placar">
+      <div class="jogador" id="jog-giu"><div class="quem">Giu</div><div class="pts" id="pts-giu" aria-live="polite">0</div>
+        <div class="soma" data-p="giu"><button type="button" data-v="1">+1</button><button type="button" data-v="2">+2</button><button type="button" data-v="3">+3</button><button type="button" data-v="4">+4</button><button type="button" data-v="5">+5</button><button type="button" data-v="6">+6</button><button type="button" class="menos" data-v="-1" aria-label="tirar 1 ponto da Giu">−1</button></div></div>
+      <div class="jogador" id="jog-leo"><div class="quem">Leo</div><div class="pts" id="pts-leo" aria-live="polite">0</div>
+        <div class="soma" data-p="leo"><button type="button" data-v="1">+1</button><button type="button" data-v="2">+2</button><button type="button" data-v="3">+3</button><button type="button" data-v="4">+4</button><button type="button" data-v="5">+5</button><button type="button" data-v="6">+6</button><button type="button" class="menos" data-v="-1" aria-label="tirar 1 ponto do Leo">−1</button></div></div>
+    </div>
+    <div class="placar-acoes">
+      <button class="btn small" type="button" id="encerrarRodada">encerrar rodada</button>
+      <button class="btn ghost small" type="button" id="zerarPlacar">zerar placar</button>
+    </div>
+    <p class="placar-nota" id="placarNota" aria-live="polite">"Encerrar rodada" guarda o resultado no hall da fama aqui embaixo.</p>
+
+    <h3 class="subhead">Hall da fama</h3>
+    <div class="hall" id="hall"></div>
 
     <h3 class="subhead">Quanto vale cada prato</h3>
     <p>Pra ninguém precisar olhar a tabela inteira de boca cheia.</p>
@@ -963,7 +1075,7 @@ details.fold[open] summary::after{transform:rotate(45deg)}
 
   <!-- ══════════════ IX · PRÓXIMA PARADA: RIO ══════════════ -->
   <!-- EDITAR: datas da viagem e a lista ficam no JavaScript, procure por "const viagemRio" e "const listaRio" -->
-  <section id="rio" class="chapter" data-title="Próxima parada: Rio" data-part="3" data-band="27.12.2026 → 06.01.2027" data-new>
+  <section id="rio" class="chapter" data-title="Próxima parada: Rio" data-part="3" data-band="27.12.2026 → 06.01.2027">
     <h2 class="title">Próxima parada: <em>Rio</em></h2>
     <p class="lead">A gente acabou de comprar e agora é oficial: o fim de 2026 e o começo de 2027 vão ser nossos, na cidade maravilhosa.</p>
 
@@ -1027,7 +1139,7 @@ details.fold[open] summary::after{transform:rotate(45deg)}
   </section>
 
   <!-- ══════════════ X · DEPOIS: CHILE ══════════════ -->
-  <section id="chile" class="chapter" data-title="Depois: Chile" data-part="3" data-band="junho de 2027" data-new>
+  <section id="chile" class="chapter" data-title="Depois: Chile" data-part="3" data-band="junho de 2027">
     <h2 class="title">E depois, <em>Chile</em></h2>
     <p class="lead">A viagem que a gente já fez mil vezes só de conversar agora tem mês marcado: cidade, neve e deserto, tudo com você.</p>
     <span class="pill" id="chileLeft">pra gente ir</span>
@@ -1116,6 +1228,16 @@ details.fold[open] summary::after{transform:rotate(45deg)}
   </section>
 
   <!-- ══════════════ XI · O QUE EU QUERO VIVER ══════════════ -->
+  <!-- ══════════════ RESTAURANTES GIU&LEO ══════════════ -->
+  <!-- EDITAR: a lista fica no JavaScript, procure por "const restaurantes" -->
+  <section id="restaurantes" class="chapter" data-title="Restaurantes Giu&amp;Leo" data-part="3" data-band="a nossa lista" data-new>
+    <h2 class="title">Restaurantes <em>Giu&amp;Leo</em></h2>
+    <p class="lead">A nossa lista, aquela que a gente vai montando e reenviando um pro outro no WhatsApp. Agora ela mora aqui. Toca em cada lugar quando a gente for, e o site guarda.</p>
+    <div id="restGroups"></div>
+    <div class="bucket-meter" style="margin-top:1.4rem" aria-live="polite">já conquistamos <b id="restCount">0</b> de <b id="restTotal">0</b></div>
+    <p class="fecho">Meta: riscar todos. Plano B: começar a lista de novo.</p>
+  </section>
+
   <section id="futuro" class="chapter" data-title="O que eu quero viver" data-part="3" data-band="pra vida toda">
     <h2 class="title">Tudo que eu <em>quero viver</em> com você</h2>
     <p class="lead">Meu futuro inteiro tem um nome: Giuliana.</p>
@@ -1255,7 +1377,14 @@ const motivos = [
 "Saber que os meus melhores dias ainda vão ser do seu lado",
 "Pensar nos nossos filhos e já querer que eles tenham os seus olhos",
 "Planejar viagem com você e já ser feliz antes mesmo de viajar",
-"A certeza de que eu quero envelhecer olhando dentro desses olhos"
+"A certeza de que eu quero envelhecer olhando dentro desses olhos",
+
+// ── 5 motivos tirados da nossa conversa ──
+"Os nossos cafés da manhã, que melhoram a minha semana inteira",
+"Te ver no palco do Noturno e não conseguir olhar pra mais nada",
+"O jeito que você cuida da Wendy",
+"Quando você diz que os meus dias de luta são os seus",
+"Você sempre querer saber se eu cheguei bem"
 ];
 
 // EDITAR: perguntas do quiz. A opção correta é sempre a primeira da lista "opts";
@@ -1273,7 +1402,11 @@ const quiz = [
  {q:"Quantos pontos vale um temaki COM arroz no Campeonato Oguru?", opts:["4 pontos","2 pontos","3 pontos","6 pontos"]},
  {q:"Que música eu te declarei debaixo do teto de vidro?", opts:["If I Had a Gun..., do Noel Gallagher","Wonderwall, do Oasis","Perfect, de Ed Sheeran","The First Time, de Damiano David"]},
  {q:"Onde a gente vai virar o ano de 2026 pra 2027?", opts:["No Rio de Janeiro","Em Juquehy","Em Campos do Jordão","Em Santiago"]},
- {q:"No Chile, onde fica o céu mais estrelado da nossa viagem?", opts:["Atacama","Santiago","Valle Nevado","Valparaíso"]}
+ {q:"No Chile, onde fica o céu mais estrelado da nossa viagem?", opts:["Atacama","Santiago","Valle Nevado","Valparaíso"]},
+ {q:"Quantas vezes eu já te mandei \"eu te amo mutio\"?", opts:["695 (e contando)","12","Nenhuma, eu escrevo certinho","100"]},
+ {q:"Qual restaurante ficou guardado pra uma ocasião especial?", opts:["O Ho","O Oguru","O Zdeli","O Holy Burguer"]},
+ {q:"Quando eu digo \"me manda a corrida\", o que eu quero mesmo?", opts:["Saber que você chegou bem","Correr com você","Pegar carona","Nada, é mania"]},
+ {q:"Em qual espetáculo você brilha no palco?", opts:["Noturno","O Fantasma da Ópera","Cats","Hamlet"]}
 ];
 
 // EDITAR: data em que começaram a namorar (ano, mês-1, dia)  →  06/03/2026
@@ -1643,7 +1776,7 @@ function rioTick(){
   }
 }
 document.getElementById('heroNews').onclick = ()=>{
-  const alvo = Date.now() > viagemRio.volta ? 'chile' : 'rio';
+  const alvo = Date.now() < oguruData.getTime() + 3*3600000 ? 'campeonato' : Date.now() > viagemRio.volta ? 'chile' : 'rio';
   go(chapters.findIndex(c=>c.id===alvo));
 };
 
@@ -1858,10 +1991,139 @@ function abrirPeloHash(){
   if(i > 0) go(i);
 }
 
+/* ═══════════════════ OGURU: contagem, placar e hall da fama ═══════════════════ */
+// EDITAR: data e hora do próximo Campeonato Oguru (ano, mês-1, dia, hora)
+const oguruData = new Date(2026, 10, 10, 12, 0, 0);
+function lerSalvo(k, padrao){ try{ const v = JSON.parse(localStorage.getItem(k)); return v == null ? padrao : v; }catch(e){ return padrao; } }
+function salvar(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+
+function oguruTick(){
+  const diff = oguruData.getTime() - Date.now();
+  const msg = document.getElementById('ogCdMsg');
+  if(diff > 0){
+    document.getElementById('og-d').textContent = Math.floor(diff/86400000);
+    document.getElementById('og-h').textContent = Math.floor(diff/3600000)%24;
+    document.getElementById('og-m').textContent = Math.floor(diff/60000)%60;
+    document.getElementById('og-s').textContent = Math.floor(diff/1000)%60;
+    // na capa, a novidade é o campeonato até ele acontecer
+    const d = Math.floor(diff/86400000);
+    document.getElementById('heroNewsTxt').innerHTML = d >= 1
+      ? 'faltam <b>'+d+' '+(d===1?'dia':'dias')+'</b> pro Campeonato Oguru'
+      : 'hoje tem <b>Campeonato Oguru</b>';
+  } else {
+    document.getElementById('ogCd').style.display = 'none';
+    msg.textContent = diff > -3*3600000 ? 'O campeonato começou! Hashi na mão.' : 'Rodada encerrada. Já pensando na revanche.';
+    if(diff > -3*3600000) document.getElementById('heroNewsTxt').innerHTML = 'o <b>Campeonato Oguru</b> tá rolando';
+  }
+}
+
+let placar = lerSalvo('giu-oguru-placar', {giu:0, leo:0});
+// EDITAR: rodadas antigas; as novas entram pelo botão "encerrar rodada"
+const hallFixo = [{dt:'jul e out 2026', txt:'Rodadas de treino. Teve muito sushi, mas sem tabela não conta: o juiz ainda não existia.'}];
+function renderPlacar(){
+  document.getElementById('pts-giu').textContent = placar.giu;
+  document.getElementById('pts-leo').textContent = placar.leo;
+  document.getElementById('jog-giu').classList.toggle('na-frente', placar.giu > placar.leo);
+  document.getElementById('jog-leo').classList.toggle('na-frente', placar.leo > placar.giu);
+}
+function renderHall(){
+  const rodadas = lerSalvo('giu-oguru-hall', []);
+  let h = hallFixo.map(r=>'<div class="hall-row"><span class="dt">'+r.dt+'</span><span class="res">'+r.txt+'</span></div>').join('');
+  rodadas.forEach(r=>{
+    const venc = r.giu > r.leo ? '<b>Giu</b> venceu' : r.leo > r.giu ? '<b>Leo</b> venceu' : '<b>Empate</b>';
+    h += '<div class="hall-row"><span class="dt">'+r.dt+'</span><span class="res">'+venc+' · Giu '+r.giu+' × '+r.leo+' Leo</span></div>';
+  });
+  if(!rodadas.length) h += '<div class="hall-row pendente"><span class="dt">10.11.2026</span><span class="res">1ª edição oficial · campeã a definir</span></div>';
+  document.getElementById('hall').innerHTML = h;
+}
+document.querySelectorAll('.placar .soma').forEach(g=>{
+  g.addEventListener('click', e=>{
+    const b = e.target.closest('button'); if(!b) return;
+    const v = Number(b.dataset.v);
+    placar[g.dataset.p] = Math.max(0, placar[g.dataset.p] + v);
+    salvar('giu-oguru-placar', placar); renderPlacar();
+    if(v > 0 && typeof burstAt === 'function') burstAt(b, 5);
+  });
+});
+const placarNota = document.getElementById('placarNota');
+const placarNotaTxt = placarNota.textContent;
+let zerarArmado = false, zerarTimer;
+document.getElementById('zerarPlacar').onclick = ()=>{
+  // dois toques pra zerar, sem janela de confirmação
+  if(!zerarArmado){
+    zerarArmado = true; placarNota.textContent = 'Toca de novo em "zerar placar" pra confirmar.';
+    clearTimeout(zerarTimer);
+    zerarTimer = setTimeout(()=>{ zerarArmado = false; placarNota.textContent = placarNotaTxt; }, 3000);
+    return;
+  }
+  zerarArmado = false; clearTimeout(zerarTimer);
+  placar = {giu:0, leo:0}; salvar('giu-oguru-placar', placar); renderPlacar();
+  placarNota.textContent = 'Placar zerado. Bora de novo!';
+};
+document.getElementById('encerrarRodada').onclick = ()=>{
+  if(!placar.giu && !placar.leo){ placarNota.textContent = 'Ninguém pontuou ainda. Come primeiro, princesa.'; return; }
+  const h = new Date();
+  const dt = String(h.getDate()).padStart(2,'0')+'.'+String(h.getMonth()+1).padStart(2,'0')+'.'+h.getFullYear();
+  const rodadas = lerSalvo('giu-oguru-hall', []);
+  rodadas.push({dt, giu:placar.giu, leo:placar.leo});
+  salvar('giu-oguru-hall', rodadas);
+  placarNota.textContent = placar.giu > placar.leo ? 'Campeã! Eu falei que era você.'
+                         : placar.leo > placar.giu ? 'Dessa vez foi minha. Revanche marcada?'
+                         : 'Empate! O amor venceu.';
+  placar = {giu:0, leo:0}; salvar('giu-oguru-placar', placar);
+  renderPlacar(); renderHall();
+};
+renderPlacar(); renderHall();
+
+/* ═══════════════════ RESTAURANTES GIU&LEO ═══════════════════ */
+// EDITAR: a nossa lista do WhatsApp (pode acrescentar à vontade)
+const restaurantes = {
+  'Hambúrguer': ['Holy Burguer','Fôrno','Buzina'],
+  'Brunch':     ['Zdeli Brunch','Tammy Montagna'],
+  'Italiano':   ['Piccini Cucina','Pepito','Marena'],
+  'Pizza':      ['Marmotta'],
+  'Asiático':   ['Caco','Mokutan','Miado','AK Deli','Kuromoon','Saiko Sando'],
+  'Japa':       ['Oguru','Hon Maguro','Ho','Oni Onigiri','Zairo (delivery)'],
+  'Sobremesa':  ['Aquarela'],
+  'Sorvete':    ['Myka Greek Frozen Yogurt','Grama Sorvete']
+};
+const restNotas = {'Ho':'guardado pro seu aniversário','Oguru':'o nosso ritual'};
+let fomos = lerSalvo('giu-restaurantes', ['Oguru']);
+(function montarRest(){
+  const box = document.getElementById('restGroups');
+  Object.entries(restaurantes).forEach(([cat, lista])=>{
+    const g = document.createElement('div'); g.className = 'rest-group';
+    g.innerHTML = '<h3>'+cat+'</h3>';
+    const l = document.createElement('div'); l.className = 'rest-list';
+    lista.forEach(nome=>{
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'rest';
+      b.setAttribute('aria-pressed', fomos.includes(nome) ? 'true' : 'false');
+      b.innerHTML = HEART_LINE + '<span>'+nome+'</span>' + (restNotas[nome] ? '<small>· '+restNotas[nome]+'</small>' : '');
+      b.onclick = ()=>{
+        const on = !fomos.includes(nome);
+        fomos = on ? fomos.concat(nome) : fomos.filter(x=>x!==nome);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        salvar('giu-restaurantes', fomos);
+        if(on) burstAt(b.querySelector('.hb'), 7);
+        contarRest();
+      };
+      l.appendChild(b);
+    });
+    g.appendChild(l); box.appendChild(g);
+  });
+  document.getElementById('restTotal').textContent = Object.values(restaurantes).flat().length;
+})();
+function contarRest(){
+  const todos = Object.values(restaurantes).flat();
+  document.getElementById('restCount').textContent = fomos.filter(n=>todos.includes(n)).length;
+}
+contarRest();
+
 /* inicializa */
 updateChrome();
-tick(); rioTick();
-setInterval(()=>{ tick(); rioTick(); }, 1000);
+tick(); rioTick(); oguruTick();
+setInterval(()=>{ tick(); rioTick(); oguruTick(); }, 1000);
 abrirPeloHash();
 window.addEventListener('hashchange', abrirPeloHash);
 </script>

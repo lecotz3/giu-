@@ -2,8 +2,15 @@
 // Guarda tudo num Upstash Redis ligado ao projeto na Vercel (Storage → Upstash Redis).
 // Sem o banco ligado, responde 503 e o site continua salvando só no celular.
 
-const URL_REDIS = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
-const TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+// A Vercel às vezes cria as variáveis com um prefixo (ex.: STORAGE_KV_REST_API_URL), então procura qualquer nome que termine assim.
+function acharEnv(fins) {
+  for (const fim of fins) {
+    const nome = Object.keys(process.env).find(k => k === fim || k.endsWith('_' + fim));
+    if (nome && process.env[nome]) return process.env[nome];
+  }
+}
+const URL_REDIS = acharEnv(['UPSTASH_REDIS_REST_URL', 'KV_REST_API_URL']);
+const TOKEN = acharEnv(['UPSTASH_REDIS_REST_TOKEN', 'KV_REST_API_TOKEN']);
 const K_RODADA = 'oguru:rodada';
 const K_HALL = 'oguru:hall';
 const LIMITE = 500;
@@ -48,7 +55,11 @@ async function lerCorpo(req) {
 
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
-  if (!URL_REDIS || !TOKEN) return res.status(503).json({ configured: false });
+  if (!URL_REDIS || !TOKEN) {
+    // só os nomes (nunca os valores), pra saber se o banco chegou a ser ligado
+    const vistos = Object.keys(process.env).filter(k => /REDIS|KV_|UPSTASH/i.test(k));
+    return res.status(503).json({ configured: false, vistos });
+  }
 
   try {
     if (req.method === 'GET') return res.status(200).json(await estado());
